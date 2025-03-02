@@ -1,6 +1,6 @@
 ---
 title: "Edward B. Quinn, PhD, MPH"
-image: Edward Quinn-min.jpg
+image: edward_quinn_min.jpeg
 about:
     template: jolla
     image-width: 20em
