@@ -13,6 +13,8 @@ website:
         text: Data Visualization
       - href: tidying_data.qmd
         text: Tidying Data
+      - href: resume.qmd
+        text: Resume
       - href: publications.qmd
         text: Publications
 

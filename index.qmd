@@ -1,3 +1,24 @@
 ---
-title: "Python Data Science Portfolio"
+title: "Edward B. Quinn, PhD, MPH"
+image: Edward Quinn-min.jpg
+about:
+    template: jolla
+    image-width: 20em
+    image-shape: round
+    links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/edwardbquinn/
+    - icon: github
+      text: Github
+      href: https://github.com/edward-quinn
+    - icon: mortarboard-fill
+      text: Google Scholar
+      href: https://scholar.google.com/citations?hl=en&user=sL13dZIAAAAJ&view_op=list_works&sortby=pubdate
+    - icon: envelope
+      text: Contact me
+      href: mailto:edward.bruce.quinn@gmail.com
 ---
+
+
+Make a gantt chart of career. That would help tell the story.
