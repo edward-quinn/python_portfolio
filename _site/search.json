@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Edward B. Quinn, PhD, MPH",
-    "section": "",
-    "text": "Make a gantt chart of career. That would help tell the story."
-  },
-  {
     "objectID": "tidying_data.html",
     "href": "tidying_data.html",
     "title": "Tidying Data with Polars",
@@ -28,6 +21,20 @@
     "text": "Make a nice table of publications with Great Tables. Include links, metrics, sparklines, etc."
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Edward B. Quinn, PhD, MPH",
+    "section": "",
+    "text": "Make a gantt chart of career. That would help tell the story."
+  },
+  {
+    "objectID": "data_visualization.html",
+    "href": "data_visualization.html",
+    "title": "Data Visualization",
+    "section": "",
+    "text": "import polars as pl\nimport seaborn as sns\nimport matplotlib as plt\n\n\ndf = (\n    pl.read_csv(\"death_rates.csv\")\n    .with_columns(pl.col(\"Year\")\n    .cast(pl.Utf8)\n    .str.to_date(format=\"%Y\"))\n)\n\n\ndf.head()\n\n\nshape: (5, 3)\n\n\n\nYear\nCause\nAge Adjusted Death Rate\n\n\ndate\nstr\nf64\n\n\n\n\n1900-01-01\n\"Heart Disease\"\n265.4\n\n\n1901-01-01\n\"Heart Disease\"\n272.6\n\n\n1902-01-01\n\"Heart Disease\"\n285.2\n\n\n1903-01-01\n\"Heart Disease\"\n304.5\n\n\n1904-01-01\n\"Heart Disease\"\n331.5\n\n\n\n\n\n\nThe year column is an integer. Make a new column where the year is a date time.\nNow make a single line chart for all leading causes of death.\n\nsns.lineplot(data = df, x = 'Year', y = 'Age Adjusted Death Rate', hue = 'Cause')\n\n\n\n\n\n\n\n\nTo make sure the _brand.yml style is applied to the matplotlib style sheet, see this video tutorial: https://www.youtube.com/watch?v=U48y0_yzEPY."
+  },
+  {
     "objectID": "machine_learning.html",
     "href": "machine_learning.html",
     "title": "Machine Learning",
@@ -47,12 +54,5 @@
     "title": "Machine Learning",
     "section": "Now get the data",
     "text": "Now get the data"
-  },
-  {
-    "objectID": "data_visualization.html",
-    "href": "data_visualization.html",
-    "title": "Data Visualization",
-    "section": "",
-    "text": "import matplotlib.pyplot as plt\nimport numpy as np\n\n\nplt.plot(range(10))"
   }
 ]

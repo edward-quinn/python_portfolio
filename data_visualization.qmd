@@ -5,8 +5,10 @@ title: "Data Visualization"
 
 ```{python}
 
-import matplotlib.pyplot as plt
-import numpy as np
+import polars as pl
+import seaborn as sns
+import matplotlib as plt
+
 
 ```
 
@@ -14,6 +16,33 @@ import numpy as np
 
 ```{python}
 
-plt.plot(range(10))
+df = (
+    pl.read_csv("death_rates.csv")
+    .with_columns(pl.col("Year")
+    .cast(pl.Utf8)
+    .str.to_date(format="%Y"))
+)
 
 ```
+
+
+
+
+```{python}
+
+df.head()
+
+```
+
+The `year` column is an integer. Make a new column where the year is a date time.
+
+
+Now make a single line chart for all leading causes of death.
+
+```{python}
+
+sns.lineplot(data = df, x = 'Year', y = 'Age Adjusted Death Rate', hue = 'Cause')
+
+```
+
+To make sure the _brand.yml style is applied to the matplotlib style sheet, see this video tutorial: https://www.youtube.com/watch?v=U48y0_yzEPY.
