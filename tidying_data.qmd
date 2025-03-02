@@ -1,0 +1,21 @@
+---
+title: "Tidying Data with Polars"
+---
+
+
+
+```{python}
+
+import polars as pl
+import matplotlib as plt
+
+```
+
+
+
+```{python}
+
+
+
+
+```

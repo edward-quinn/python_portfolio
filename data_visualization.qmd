@@ -1,0 +1,19 @@
+---
+title: "Data Visualization"
+---
+
+
+```{python}
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+```
+
+
+
+```{python}
+
+plt.plot(range(10))
+
+```

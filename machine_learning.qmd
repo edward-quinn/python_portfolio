@@ -1,0 +1,39 @@
+---
+title: "Machine Learning"
+author: "Edward B. Quinn, Ph.D., MPH"
+toc: true
+---
+
+
+## markdown text
+
+```{python}
+
+import polars as pl
+
+```
+
+## Now get the data
+
+```{python}
+
+
+
+```
+
+
+```{python}
+
+```
+
+
+
+```{python}
+
+```
+
+
+
+```{python}
+
+```

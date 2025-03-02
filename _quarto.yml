@@ -7,7 +7,15 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: machine_learning.qmd
+        text: Machine Learning
+      - href: data_visualization.qmd
+        text: Data Visualization
+      - href: tidying_data.qmd
+        text: Tidying Data
+      - href: publications.qmd
+        text: Publications
+
 
 format:
   html:

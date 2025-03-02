@@ -2,7 +2,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Python Portfolio",
+    "title": "Python Data Science Portfolio",
     "section": "",
     "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
   },
@@ -11,6 +11,55 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this site"
+    "text": "About this site\n\n2 + 2\n\n4"
+  },
+  {
+    "objectID": "machine_learning.html",
+    "href": "machine_learning.html",
+    "title": "Machine Learning",
+    "section": "",
+    "text": "import polars as pl"
+  },
+  {
+    "objectID": "machine_learning.html#markdown-text",
+    "href": "machine_learning.html#markdown-text",
+    "title": "Machine Learning",
+    "section": "",
+    "text": "import polars as pl"
+  },
+  {
+    "objectID": "machine_learning.html#now-get-the-data",
+    "href": "machine_learning.html#now-get-the-data",
+    "title": "Machine Learning",
+    "section": "Now get the data",
+    "text": "Now get the data"
+  },
+  {
+    "objectID": "data_visualization.html",
+    "href": "data_visualization.html",
+    "title": "Data Visualization",
+    "section": "",
+    "text": "import matplotlib.pyplot as plt\nimport numpy as np\n\n\nplt.plot(range(10))"
+  },
+  {
+    "objectID": "tidying_data.html",
+    "href": "tidying_data.html",
+    "title": "Tidying Data with Polars",
+    "section": "",
+    "text": "import polars as pl\nimport matplotlib as plt"
+  },
+  {
+    "objectID": "publications.html",
+    "href": "publications.html",
+    "title": "All of My Publications",
+    "section": "",
+    "text": "Make a nice table of publications with Great Tables. Include links, metrics, sparklines, etc."
+  },
+  {
+    "objectID": "publications.html#the-data",
+    "href": "publications.html#the-data",
+    "title": "All of My Publications",
+    "section": "",
+    "text": "Make a nice table of publications with Great Tables. Include links, metrics, sparklines, etc."
   }
 ]
