@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Edward B. Quinn, PhD, MPH",
+    "section": "",
+    "text": "Make a gantt chart of career. That would help tell the story."
+  },
+  {
     "objectID": "tidying_data.html",
     "href": "tidying_data.html",
     "title": "Tidying Data with Polars",
@@ -21,13 +28,6 @@
     "text": "Make a nice table of publications with Great Tables. Include links, metrics, sparklines, etc."
   },
   {
-    "objectID": "data_visualization.html",
-    "href": "data_visualization.html",
-    "title": "Data Visualization",
-    "section": "",
-    "text": "import matplotlib.pyplot as plt\nimport numpy as np\n\n\nplt.plot(range(10))"
-  },
-  {
     "objectID": "machine_learning.html",
     "href": "machine_learning.html",
     "title": "Machine Learning",
@@ -47,5 +47,12 @@
     "title": "Machine Learning",
     "section": "Now get the data",
     "text": "Now get the data"
+  },
+  {
+    "objectID": "data_visualization.html",
+    "href": "data_visualization.html",
+    "title": "Data Visualization",
+    "section": "",
+    "text": "import matplotlib.pyplot as plt\nimport numpy as np\n\n\nplt.plot(range(10))"
   }
 ]
