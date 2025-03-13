@@ -22,3 +22,85 @@ about:
 
 
 Make a gantt chart of career. That would help tell the story.
+
+```{python}
+
+import polars as pl
+import matplotlib.pyplot as plt
+import seaborn as sns
+from datetime import datetime
+
+```
+
+
+```{python}
+
+
+# Define the data
+data = {
+    "activity": [
+        "Graduate Research Assistant", "Graduate Research Assistant", "Human Biomarkers Researcher",
+        "Assistant Research Specialist", "M.A. in Medical Anthropology", "Ph.D. in Biological Anthropology",
+        "Graduate Research Assistant", "Data Analyst", "Graduate Research Assistant",
+        "Senior Data Analyst", "Compliance and Data Officer", "Data Science Consultant"
+    ],
+    "start_date": [
+        "August 2014", "May 2015", "May 2016", "September 2016", "August 2014", "August 2018",
+        "August 2018", "June 2021", "August 2018", "March 2023", "May 2024", "May 2024"
+    ],
+    "end_date": [
+        "December 2014", "May 2016", "August 2016", "June 2018", "May 2016", "December 2022",
+        "December 2022", "February 2023", "December 2022", "May 2024", "April 2025", "August 2024"
+    ],
+    "activity_type": [
+        "Research", "Research", "Research", "Research", "Education", "Education",
+        "Research", "Data Analysis", "Research", "Data Analysis", "Data Analysis", "Data Analysis"
+    ]
+}
+
+# Convert to Polars DataFrame and adjust date format
+df = pl.DataFrame(data).with_columns([
+    (pl.col("start_date") + "-01").str.strptime(pl.Date, "%B %Y-%d", strict=False),
+    (pl.col("end_date") + "-01").str.strptime(pl.Date, "%B %Y-%d", strict=False)
+]).sort("start_date", descending=True)
+
+# Show the DataFrame
+print(df)
+
+
+
+```
+
+
+
+```{python}
+
+# Define colors for each activity type
+activity_colors = {
+    "Research": "tab:blue",
+    "Education": "tab:green",
+    "Data Analysis": "tab:orange"
+}
+
+# Create figure and axis
+fig, ax = plt.subplots(figsize=(10, 6))
+
+# Generate Gantt bars
+for i, row in enumerate(df.iter_rows(named=True)):
+    start = row["start_date"]
+    end = row["end_date"]
+    activity = row["activity"]
+    activity_type = row["activity_type"]
+    
+    ax.barh(activity, (end - start).days, left=start, color=activity_colors.get(activity_type, "gray"))
+
+
+# Labels and title
+
+ax.set_ylabel("Activity")
+ax.set_title("Gantt Chart of Activities")
+
+plt.show()
+
+```
+
