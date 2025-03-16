@@ -183,266 +183,565 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="b8bcd305" class="cell" data-execution_count="1">
+<div id="f77dfeea" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars.selectors <span class="im">as</span> cs </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> great_tables <span class="im">import</span> GT, loc, style</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Get the data from google scholar</p>
-<div id="38770b99" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_csv(<span class="st">"citations.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="5e07e5a4" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>gt_table_1 <span class="op">=</span> GT(df)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>gt_table_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="897cdfbd" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>gt1 <span class="op">=</span> GT(df)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>gt1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
-<div id="agqbqwlypu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="yptssetfdz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>
-#agqbqwlypu table {
+#yptssetfdz table {
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
         }
 
-#agqbqwlypu thead, tbody, tfoot, tr, td, th { border-style: none; }
+#yptssetfdz thead, tbody, tfoot, tr, td, th { border-style: none; }
  tr { background-color: transparent; }
-#agqbqwlypu p { margin: 0; padding: 0; }
- #agqbqwlypu .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
- #agqbqwlypu .gt_caption { padding-top: 4px; padding-bottom: 4px; }
- #agqbqwlypu .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
- #agqbqwlypu .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
- #agqbqwlypu .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
- #agqbqwlypu .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
- #agqbqwlypu .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
- #agqbqwlypu .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
- #agqbqwlypu .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
- #agqbqwlypu .gt_column_spanner_outer:first-child { padding-left: 0; }
- #agqbqwlypu .gt_column_spanner_outer:last-child { padding-right: 0; }
- #agqbqwlypu .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
- #agqbqwlypu .gt_spanner_row { border-bottom-style: hidden; }
- #agqbqwlypu .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
- #agqbqwlypu .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
- #agqbqwlypu .gt_from_md> :first-child { margin-top: 0; }
- #agqbqwlypu .gt_from_md> :last-child { margin-bottom: 0; }
- #agqbqwlypu .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
- #agqbqwlypu .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
- #agqbqwlypu .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
- #agqbqwlypu .gt_row_group_first td { border-top-width: 2px; }
- #agqbqwlypu .gt_row_group_first th { border-top-width: 2px; }
- #agqbqwlypu .gt_striped { background-color: rgba(128,128,128,0.05); }
- #agqbqwlypu .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
- #agqbqwlypu .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
- #agqbqwlypu .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
- #agqbqwlypu .gt_left { text-align: left; }
- #agqbqwlypu .gt_center { text-align: center; }
- #agqbqwlypu .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
- #agqbqwlypu .gt_font_normal { font-weight: normal; }
- #agqbqwlypu .gt_font_bold { font-weight: bold; }
- #agqbqwlypu .gt_font_italic { font-style: italic; }
- #agqbqwlypu .gt_super { font-size: 65%; }
- #agqbqwlypu .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
- #agqbqwlypu .gt_asterisk { font-size: 100%; vertical-align: 0; }
+#yptssetfdz p { margin: 0; padding: 0; }
+ #yptssetfdz .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #yptssetfdz .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #yptssetfdz .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #yptssetfdz .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #yptssetfdz .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #yptssetfdz .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #yptssetfdz .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #yptssetfdz .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #yptssetfdz .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #yptssetfdz .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #yptssetfdz .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #yptssetfdz .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #yptssetfdz .gt_spanner_row { border-bottom-style: hidden; }
+ #yptssetfdz .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #yptssetfdz .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #yptssetfdz .gt_from_md> :first-child { margin-top: 0; }
+ #yptssetfdz .gt_from_md> :last-child { margin-bottom: 0; }
+ #yptssetfdz .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #yptssetfdz .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #yptssetfdz .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #yptssetfdz .gt_row_group_first td { border-top-width: 2px; }
+ #yptssetfdz .gt_row_group_first th { border-top-width: 2px; }
+ #yptssetfdz .gt_striped { background-color: rgba(128,128,128,0.05); }
+ #yptssetfdz .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #yptssetfdz .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #yptssetfdz .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #yptssetfdz .gt_left { text-align: left; }
+ #yptssetfdz .gt_center { text-align: center; }
+ #yptssetfdz .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #yptssetfdz .gt_font_normal { font-weight: normal; }
+ #yptssetfdz .gt_font_bold { font-weight: bold; }
+ #yptssetfdz .gt_font_italic { font-style: italic; }
+ #yptssetfdz .gt_super { font-size: 65%; }
+ #yptssetfdz .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #yptssetfdz .gt_asterisk { font-size: 100%; vertical-align: 0; }
  
 </style>
-
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
-<tr class="gt_col_headings header">
-<th id="Authors" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Authors</th>
-<th id="Title" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Title</th>
-<th id="Publication" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Publication</th>
-<th id="Volume" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Volume</th>
-<th id="Number" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Number</th>
-<th id="Pages" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Pages</th>
-<th id="Year" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Year</th>
-<th id="Publisher" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Publisher</th>
+
+<tr class="gt_col_headings">
+  <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Year">Year</th>
+  <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Title">Title</th>
+  <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Venue">Venue</th>
+  <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Authors">Authors</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left">Quinn, EB; Decaro, JA;</td>
-<td class="gt_row gt_left">Discrimination, cultural consonance, and cell-mediated immunity among college students.</td>
-<td class="gt_row gt_left">AMERICAN JOURNAL OF HUMAN BIOLOGY</td>
-<td class="gt_row gt_right">28</td>
-<td class="gt_row gt_right">2</td>
-<td class="gt_row gt_left">293-293</td>
-<td class="gt_row gt_right">2016</td>
-<td class="gt_row gt_left">WILEY-BLACKWELL 111 RIVER ST, HOBOKEN 07030-5774, NJ USA</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">Quinn, EB; DeCaro, JA;</td>
-<td class="gt_row gt_left">Perceived discrimination differentially associated with inflammation depending on self-reported race/ethnicity</td>
-<td class="gt_row gt_left">AMERICAN JOURNAL OF HUMAN BIOLOGY</td>
-<td class="gt_row gt_right">31</td>
-<td class="gt_row gt_right">2</td>
-<td class="gt_row gt_left">None</td>
-<td class="gt_row gt_right">2019</td>
-<td class="gt_row gt_left">WILEY 111 RIVER ST, HOBOKEN 07030-5774, NJ USA</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left">Hsiao, Chu J; Walters, Anna C; Quinn, Edward B; Maisha, Felicien; Mulligan, Connie J;</td>
-<td class="gt_row gt_left">Gene expression in placental tissue compared with gene expression in venous blood from mothers and newborns in the Democratic Republic of Congo</td>
-<td class="gt_row gt_left">AMERICAN JOURNAL OF PHYSICAL ANTHROPOLOGY</td>
-<td class="gt_row gt_right">174</td>
-<td class="gt_row gt_right">None</td>
-<td class="gt_row gt_left">48-49</td>
-<td class="gt_row gt_right">2021</td>
-<td class="gt_row gt_left">WILEY 111 RIVER ST, HOBOKEN 07030-5774, NJ USA</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">Nevell, Lisa; Clukay, Christopher J; Hsiao, Chu; Quinn, Edward; Maisha, Felicien M; Mulligan, Connie J;</td>
-<td class="gt_row gt_left">Development of a maternal stress measure associated with low birthweight</td>
-<td class="gt_row gt_left">AMERICAN JOURNAL OF PHYSICAL ANTHROPOLOGY</td>
-<td class="gt_row gt_right">171</td>
-<td class="gt_row gt_right">None</td>
-<td class="gt_row gt_left">199-199</td>
-<td class="gt_row gt_right">2020</td>
-<td class="gt_row gt_left">WILEY 111 RIVER ST, HOBOKEN 07030-5774, NJ USA</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left">Quinn, EB; Clukay, CJ; Rodriguez, D; Nevell, LD; Maisha, FM; Kertes, DA; Mulligan, CJ;</td>
-<td class="gt_row gt_left">Testing for epigenetic selection in newborns of high stress-exposed mothers in the Democratic Republic of Congo.</td>
-<td class="gt_row gt_left">AMERICAN JOURNAL OF HUMAN BIOLOGY</td>
-<td class="gt_row gt_right">32</td>
-<td class="gt_row gt_right">None</td>
-<td class="gt_row gt_left">None</td>
-<td class="gt_row gt_right">2020</td>
-<td class="gt_row gt_left">WILEY 111 RIVER ST, HOBOKEN 07030-5774, NJ USA</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">Aronoff, Jacob E; Quinn, Edward B; Forde, Allana T; Glover, Láshauntá M; Reiner, Alexander; McDade, Thomas W; Sims, Mario;</td>
-<td class="gt_row gt_left">Associations between perceived discrimination and immune cell composition in the Jackson Heart Study</td>
-<td class="gt_row gt_left">Brain, behavior, and immunity</td>
-<td class="gt_row gt_right">103</td>
-<td class="gt_row gt_right">None</td>
-<td class="gt_row gt_left">28-36</td>
-<td class="gt_row gt_right">2022</td>
-<td class="gt_row gt_left">Academic Press</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left">Quinn, Edward B; Hsiao, Chu J; Maisha, Felicien M; Mulligan, Connie J;</td>
-<td class="gt_row gt_left">Birthweight predicts epigenetic age acceleration during the first three years of life</td>
-<td class="gt_row gt_left">AMERICAN JOURNAL OF BIOLOGICAL ANTHROPOLOGY</td>
-<td class="gt_row gt_right">177</td>
-<td class="gt_row gt_right">None</td>
-<td class="gt_row gt_left">148-148</td>
-<td class="gt_row gt_right">2022</td>
-<td class="gt_row gt_left">WILEY 111 RIVER ST, HOBOKEN 07030-5774, NJ USA</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">Quinn, Edward Bruce;</td>
-<td class="gt_row gt_left">Discrimination, cultural consonance, and cell-mediated immunity among college students at the University of Alabama</td>
-<td class="gt_row gt_left">None</td>
-<td class="gt_row gt_right">None</td>
-<td class="gt_row gt_right">None</td>
-<td class="gt_row gt_left">None</td>
-<td class="gt_row gt_right">2016</td>
-<td class="gt_row gt_left">The University of Alabama</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left">Rozario, Tania; Quinn, Edward B; Wang, Jianbin; Davis, Richard E; Newmark, Phillip A;</td>
-<td class="gt_row gt_left">Region-specific regulation of stem cell-driven regeneration in tapeworms</td>
-<td class="gt_row gt_left">Elife</td>
-<td class="gt_row gt_right">8</td>
-<td class="gt_row gt_right">None</td>
-<td class="gt_row gt_left">e48958</td>
-<td class="gt_row gt_right">2019</td>
-<td class="gt_row gt_left">eLife Sciences Publications, Ltd</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">Quinn, Edward B.; LeLaurin, Jennifer H.; Eliazar-Macke, Nathaniel D.; Orozco, Tatiana; Montague, Magda; Freytes, I. Magaly; Uphold, Constance R.;</td>
-<td class="gt_row gt_left">Effect of a telephone and web-based problem-solving intervention for stroke caregivers on stroke patient activities of daily living: A randomized controlled trial</td>
-<td class="gt_row gt_left">Clinical Rehabilitation</td>
-<td class="gt_row gt_right">None</td>
-<td class="gt_row gt_right">None</td>
-<td class="gt_row gt_left">None</td>
-<td class="gt_row gt_right">2023</td>
-<td class="gt_row gt_left">None</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left">Dutton, Christopher L; Maisha, Felicien Masanga; Quinn, Edward B; Morales, Katherine Liceth; Moore, Julie M; Mulligan, Connie J;</td>
-<td class="gt_row gt_left">Maternal psychosocial stress is associated with reduced diversity in the early infant gut microbiome</td>
-<td class="gt_row gt_left">Microorganisms</td>
-<td class="gt_row gt_right">11</td>
-<td class="gt_row gt_right">4</td>
-<td class="gt_row gt_left">975</td>
-<td class="gt_row gt_right">2023</td>
-<td class="gt_row gt_left">MDPI</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">Quinn, Edward B; Hsiao, Chu J; Maisha, Felicien M; Mulligan, Connie J;</td>
-<td class="gt_row gt_left">Prenatal maternal stress is associated with site-specific and age acceleration changes in maternal and newborn DNA methylation</td>
-<td class="gt_row gt_left">Epigenetics</td>
-<td class="gt_row gt_right">18</td>
-<td class="gt_row gt_right">1</td>
-<td class="gt_row gt_left">2222473</td>
-<td class="gt_row gt_right">2023</td>
-<td class="gt_row gt_left">Taylor &amp; Francis</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left">Quinn, Edward B; Hsiao, Chu J; Maisha, Felicien M; Mulligan, Connie J;</td>
-<td class="gt_row gt_left">Low birthweight is associated with epigenetic age acceleration in the first 3 years of life</td>
-<td class="gt_row gt_left">Evolution, Medicine, and Public Health</td>
-<td class="gt_row gt_right">11</td>
-<td class="gt_row gt_right">1</td>
-<td class="gt_row gt_left">251-261</td>
-<td class="gt_row gt_right">2023</td>
-<td class="gt_row gt_left">Oxford University Press US</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">Quinn, Edward B; Ross, Jessica D; Boston, P Qasimah; Mulligan, Connie J; Gravlee, Clarence C; HEAT Steering Committee;</td>
-<td class="gt_row gt_left">The social patterning of vicarious discrimination: Implications for health equity</td>
-<td class="gt_row gt_left">Social Science &amp; Medicine</td>
-<td class="gt_row gt_right">332</td>
-<td class="gt_row gt_right">None</td>
-<td class="gt_row gt_left">116104</td>
-<td class="gt_row gt_right">2023</td>
-<td class="gt_row gt_left">Pergamon</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left">Hsiao, Chu J; Quinn, Edward B; Maisha, Felicien M; Nevell, Lisa D; Mulligan, Connie J;</td>
-<td class="gt_row gt_left">Associations of maternal stress, gene expression, and newborn birthweight in the Democratic Republic of Congo</td>
-<td class="gt_row gt_left">American Journal of Biological Anthropology</td>
-<td class="gt_row gt_right">183</td>
-<td class="gt_row gt_right">4</td>
-<td class="gt_row gt_left">e24862</td>
-<td class="gt_row gt_right">2024</td>
-<td class="gt_row gt_left">John Wiley &amp; Sons, Inc. Hoboken, USA</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">Quinn, Edward B;</td>
-<td class="gt_row gt_left">A Biocultural Approach to Understanding the Impacts of Psychosocial Stress</td>
-<td class="gt_row gt_left">None</td>
-<td class="gt_row gt_right">None</td>
-<td class="gt_row gt_right">None</td>
-<td class="gt_row gt_left">None</td>
-<td class="gt_row gt_right">2022</td>
-<td class="gt_row gt_left">University of Florida</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left">Mulligan, Connie J; Quinn, Edward B; Hamadmad, Dima; Dutton, Christopher L; Nevell, Lisa; Binder, Alexandra M; Panter-Brick, Catherine; Dajani, Rana;</td>
-<td class="gt_row gt_left">Epigenetic signatures of intergenerational exposure to violence</td>
-<td class="gt_row gt_left">AMERICAN JOURNAL OF BIOLOGICAL ANTHROPOLOGY</td>
-<td class="gt_row gt_right">183</td>
-<td class="gt_row gt_right">None</td>
-<td class="gt_row gt_left">123-123</td>
-<td class="gt_row gt_right">2024</td>
-<td class="gt_row gt_left">WILEY 111 RIVER ST, HOBOKEN 07030-5774, NJ USA</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">Mulligan, Connie J; Quinn, Edward B; Hamadmad, Dima; Dutton, Christopher L; Nevell, Lisa; Binder, Alexandra M; Panter-Brick, Catherine; Dajani, Rana;</td>
-<td class="gt_row gt_left">Epigenetic signatures of intergenerational exposure to violence in three generations of Syrian refugees</td>
-<td class="gt_row gt_left">Scientific Reports</td>
-<td class="gt_row gt_right">15</td>
-<td class="gt_row gt_right">1</td>
-<td class="gt_row gt_left">5945</td>
-<td class="gt_row gt_right">2025</td>
-<td class="gt_row gt_left">Nature Publishing Group UK London</td>
-</tr>
+  <tr>
+    <td class="gt_row gt_right">2025</td>
+    <td class="gt_row gt_left">Epigenetic signatures of intergenerational exposure to violence in three generations of Syrian refugees</td>
+    <td class="gt_row gt_left">Scientific Reports</td>
+    <td class="gt_row gt_left">Mulligan, Connie J; Quinn, Edward B; Hamadmad, Dima; Dutton, Christopher L; Nevell, Lisa; Binder, Alexandra M; Panter-Brick, Catherine; Dajani, Rana; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2024</td>
+    <td class="gt_row gt_left">Associations of maternal stress, gene expression, and newborn birthweight in the Democratic Republic of Congo</td>
+    <td class="gt_row gt_left">American Journal Of Biological Anthropology</td>
+    <td class="gt_row gt_left">Hsiao, Chu J; Quinn, Edward B; Maisha, Felicien M; Nevell, Lisa D; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2024</td>
+    <td class="gt_row gt_left">Epigenetic signatures of intergenerational exposure to violence</td>
+    <td class="gt_row gt_left">American Journal Of Biological Anthropology</td>
+    <td class="gt_row gt_left">Mulligan, Connie J; Quinn, Edward B; Hamadmad, Dima; Dutton, Christopher L; Nevell, Lisa; Binder, Alexandra M; Panter-Brick, Catherine; Dajani, Rana; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2023</td>
+    <td class="gt_row gt_left">Effect of a telephone and web-based problem-solving intervention for stroke caregivers on stroke patient activities of daily living: A randomized controlled trial</td>
+    <td class="gt_row gt_left">Clinical Rehabilitation</td>
+    <td class="gt_row gt_left">Quinn, Edward B.; LeLaurin, Jennifer H.; Eliazar-Macke, Nathaniel D.; Orozco, Tatiana; Montague, Magda; Freytes, I. Magaly; Uphold, Constance R.; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2023</td>
+    <td class="gt_row gt_left">Maternal psychosocial stress is associated with reduced diversity in the early infant gut microbiome</td>
+    <td class="gt_row gt_left">Microorganisms</td>
+    <td class="gt_row gt_left">Dutton, Christopher L; Maisha, Felicien Masanga; Quinn, Edward B; Morales, Katherine Liceth; Moore, Julie M; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2023</td>
+    <td class="gt_row gt_left">Prenatal maternal stress is associated with site-specific and age acceleration changes in maternal and newborn DNA methylation</td>
+    <td class="gt_row gt_left">Epigenetics</td>
+    <td class="gt_row gt_left">Quinn, Edward B; Hsiao, Chu J; Maisha, Felicien M; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2023</td>
+    <td class="gt_row gt_left">Low birthweight is associated with epigenetic age acceleration in the first 3 years of life</td>
+    <td class="gt_row gt_left">Evolution, Medicine, And Public Health</td>
+    <td class="gt_row gt_left">Quinn, Edward B; Hsiao, Chu J; Maisha, Felicien M; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2023</td>
+    <td class="gt_row gt_left">The social patterning of vicarious discrimination: Implications for health equity</td>
+    <td class="gt_row gt_left">Social Science &amp; Medicine</td>
+    <td class="gt_row gt_left">Quinn, Edward B; Ross, Jessica D; Boston, P Qasimah; Mulligan, Connie J; Gravlee, Clarence C; HEAT Steering Committee; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2022</td>
+    <td class="gt_row gt_left">Associations between perceived discrimination and immune cell composition in the Jackson Heart Study</td>
+    <td class="gt_row gt_left">Brain, Behavior, And Immunity</td>
+    <td class="gt_row gt_left">Aronoff, Jacob E; Quinn, Edward B; Forde, Allana T; Glover, Láshauntá M; Reiner, Alexander; McDade, Thomas W; Sims, Mario; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2022</td>
+    <td class="gt_row gt_left">Birthweight predicts epigenetic age acceleration during the first three years of life</td>
+    <td class="gt_row gt_left">American Journal Of Biological Anthropology</td>
+    <td class="gt_row gt_left">Quinn, Edward B; Hsiao, Chu J; Maisha, Felicien M; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2022</td>
+    <td class="gt_row gt_left">A Biocultural Approach to Understanding the Impacts of Psychosocial Stress</td>
+    <td class="gt_row gt_left">None</td>
+    <td class="gt_row gt_left">Quinn, Edward B; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2021</td>
+    <td class="gt_row gt_left">Gene expression in placental tissue compared with gene expression in venous blood from mothers and newborns in the Democratic Republic of Congo</td>
+    <td class="gt_row gt_left">American Journal Of Physical Anthropology</td>
+    <td class="gt_row gt_left">Hsiao, Chu J; Walters, Anna C; Quinn, Edward B; Maisha, Felicien; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2020</td>
+    <td class="gt_row gt_left">Development of a maternal stress measure associated with low birthweight</td>
+    <td class="gt_row gt_left">American Journal Of Physical Anthropology</td>
+    <td class="gt_row gt_left">Nevell, Lisa; Clukay, Christopher J; Hsiao, Chu; Quinn, Edward; Maisha, Felicien M; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2020</td>
+    <td class="gt_row gt_left">Testing for epigenetic selection in newborns of high stress-exposed mothers in the Democratic Republic of Congo.</td>
+    <td class="gt_row gt_left">American Journal Of Human Biology</td>
+    <td class="gt_row gt_left">Quinn, EB; Clukay, CJ; Rodriguez, D; Nevell, LD; Maisha, FM; Kertes, DA; Mulligan, CJ; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2019</td>
+    <td class="gt_row gt_left">Perceived discrimination differentially associated with inflammation depending on self-reported race/ethnicity</td>
+    <td class="gt_row gt_left">American Journal Of Human Biology</td>
+    <td class="gt_row gt_left">Quinn, EB; DeCaro, JA; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2019</td>
+    <td class="gt_row gt_left">Region-specific regulation of stem cell-driven regeneration in tapeworms</td>
+    <td class="gt_row gt_left">Elife</td>
+    <td class="gt_row gt_left">Rozario, Tania; Quinn, Edward B; Wang, Jianbin; Davis, Richard E; Newmark, Phillip A; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2016</td>
+    <td class="gt_row gt_left">Discrimination, cultural consonance, and cell-mediated immunity among college students.</td>
+    <td class="gt_row gt_left">American Journal Of Human Biology</td>
+    <td class="gt_row gt_left">Quinn, EB; Decaro, JA; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2016</td>
+    <td class="gt_row gt_left">Discrimination, cultural consonance, and cell-mediated immunity among college students at the University of Alabama</td>
+    <td class="gt_row gt_left">None</td>
+    <td class="gt_row gt_left">Quinn, Edward Bruce; </td>
+  </tr>
 </tbody>
+
+
 </table>
 
+</div>
+        
+</div>
+</div>
+<div id="c4ec98a7" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>gt2 <span class="op">=</span> (</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    gt1</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    .tab_header(title<span class="op">=</span><span class="st">"Published Works"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>gt2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div id="lymefkypqm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#lymefkypqm table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#lymefkypqm thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#lymefkypqm p { margin: 0; padding: 0; }
+ #lymefkypqm .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #lymefkypqm .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #lymefkypqm .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #lymefkypqm .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #lymefkypqm .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #lymefkypqm .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #lymefkypqm .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #lymefkypqm .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #lymefkypqm .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #lymefkypqm .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #lymefkypqm .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #lymefkypqm .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #lymefkypqm .gt_spanner_row { border-bottom-style: hidden; }
+ #lymefkypqm .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #lymefkypqm .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #lymefkypqm .gt_from_md> :first-child { margin-top: 0; }
+ #lymefkypqm .gt_from_md> :last-child { margin-bottom: 0; }
+ #lymefkypqm .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #lymefkypqm .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #lymefkypqm .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #lymefkypqm .gt_row_group_first td { border-top-width: 2px; }
+ #lymefkypqm .gt_row_group_first th { border-top-width: 2px; }
+ #lymefkypqm .gt_striped { background-color: rgba(128,128,128,0.05); }
+ #lymefkypqm .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #lymefkypqm .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #lymefkypqm .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #lymefkypqm .gt_left { text-align: left; }
+ #lymefkypqm .gt_center { text-align: center; }
+ #lymefkypqm .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #lymefkypqm .gt_font_normal { font-weight: normal; }
+ #lymefkypqm .gt_font_bold { font-weight: bold; }
+ #lymefkypqm .gt_font_italic { font-style: italic; }
+ #lymefkypqm .gt_super { font-size: 65%; }
+ #lymefkypqm .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #lymefkypqm .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+
+  <tr class="gt_heading">
+    <td colspan="4" class="gt_heading gt_title gt_font_normal">Published Works</td>
+  </tr>
+<tr class="gt_col_headings">
+  <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Year">Year</th>
+  <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Title">Title</th>
+  <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Venue">Venue</th>
+  <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Authors">Authors</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+  <tr>
+    <td class="gt_row gt_right">2025</td>
+    <td class="gt_row gt_left">Epigenetic signatures of intergenerational exposure to violence in three generations of Syrian refugees</td>
+    <td class="gt_row gt_left">Scientific Reports</td>
+    <td class="gt_row gt_left">Mulligan, Connie J; Quinn, Edward B; Hamadmad, Dima; Dutton, Christopher L; Nevell, Lisa; Binder, Alexandra M; Panter-Brick, Catherine; Dajani, Rana; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2024</td>
+    <td class="gt_row gt_left">Associations of maternal stress, gene expression, and newborn birthweight in the Democratic Republic of Congo</td>
+    <td class="gt_row gt_left">American Journal Of Biological Anthropology</td>
+    <td class="gt_row gt_left">Hsiao, Chu J; Quinn, Edward B; Maisha, Felicien M; Nevell, Lisa D; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2024</td>
+    <td class="gt_row gt_left">Epigenetic signatures of intergenerational exposure to violence</td>
+    <td class="gt_row gt_left">American Journal Of Biological Anthropology</td>
+    <td class="gt_row gt_left">Mulligan, Connie J; Quinn, Edward B; Hamadmad, Dima; Dutton, Christopher L; Nevell, Lisa; Binder, Alexandra M; Panter-Brick, Catherine; Dajani, Rana; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2023</td>
+    <td class="gt_row gt_left">Effect of a telephone and web-based problem-solving intervention for stroke caregivers on stroke patient activities of daily living: A randomized controlled trial</td>
+    <td class="gt_row gt_left">Clinical Rehabilitation</td>
+    <td class="gt_row gt_left">Quinn, Edward B.; LeLaurin, Jennifer H.; Eliazar-Macke, Nathaniel D.; Orozco, Tatiana; Montague, Magda; Freytes, I. Magaly; Uphold, Constance R.; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2023</td>
+    <td class="gt_row gt_left">Maternal psychosocial stress is associated with reduced diversity in the early infant gut microbiome</td>
+    <td class="gt_row gt_left">Microorganisms</td>
+    <td class="gt_row gt_left">Dutton, Christopher L; Maisha, Felicien Masanga; Quinn, Edward B; Morales, Katherine Liceth; Moore, Julie M; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2023</td>
+    <td class="gt_row gt_left">Prenatal maternal stress is associated with site-specific and age acceleration changes in maternal and newborn DNA methylation</td>
+    <td class="gt_row gt_left">Epigenetics</td>
+    <td class="gt_row gt_left">Quinn, Edward B; Hsiao, Chu J; Maisha, Felicien M; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2023</td>
+    <td class="gt_row gt_left">Low birthweight is associated with epigenetic age acceleration in the first 3 years of life</td>
+    <td class="gt_row gt_left">Evolution, Medicine, And Public Health</td>
+    <td class="gt_row gt_left">Quinn, Edward B; Hsiao, Chu J; Maisha, Felicien M; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2023</td>
+    <td class="gt_row gt_left">The social patterning of vicarious discrimination: Implications for health equity</td>
+    <td class="gt_row gt_left">Social Science &amp; Medicine</td>
+    <td class="gt_row gt_left">Quinn, Edward B; Ross, Jessica D; Boston, P Qasimah; Mulligan, Connie J; Gravlee, Clarence C; HEAT Steering Committee; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2022</td>
+    <td class="gt_row gt_left">Associations between perceived discrimination and immune cell composition in the Jackson Heart Study</td>
+    <td class="gt_row gt_left">Brain, Behavior, And Immunity</td>
+    <td class="gt_row gt_left">Aronoff, Jacob E; Quinn, Edward B; Forde, Allana T; Glover, Láshauntá M; Reiner, Alexander; McDade, Thomas W; Sims, Mario; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2022</td>
+    <td class="gt_row gt_left">Birthweight predicts epigenetic age acceleration during the first three years of life</td>
+    <td class="gt_row gt_left">American Journal Of Biological Anthropology</td>
+    <td class="gt_row gt_left">Quinn, Edward B; Hsiao, Chu J; Maisha, Felicien M; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2022</td>
+    <td class="gt_row gt_left">A Biocultural Approach to Understanding the Impacts of Psychosocial Stress</td>
+    <td class="gt_row gt_left">None</td>
+    <td class="gt_row gt_left">Quinn, Edward B; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2021</td>
+    <td class="gt_row gt_left">Gene expression in placental tissue compared with gene expression in venous blood from mothers and newborns in the Democratic Republic of Congo</td>
+    <td class="gt_row gt_left">American Journal Of Physical Anthropology</td>
+    <td class="gt_row gt_left">Hsiao, Chu J; Walters, Anna C; Quinn, Edward B; Maisha, Felicien; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2020</td>
+    <td class="gt_row gt_left">Development of a maternal stress measure associated with low birthweight</td>
+    <td class="gt_row gt_left">American Journal Of Physical Anthropology</td>
+    <td class="gt_row gt_left">Nevell, Lisa; Clukay, Christopher J; Hsiao, Chu; Quinn, Edward; Maisha, Felicien M; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2020</td>
+    <td class="gt_row gt_left">Testing for epigenetic selection in newborns of high stress-exposed mothers in the Democratic Republic of Congo.</td>
+    <td class="gt_row gt_left">American Journal Of Human Biology</td>
+    <td class="gt_row gt_left">Quinn, EB; Clukay, CJ; Rodriguez, D; Nevell, LD; Maisha, FM; Kertes, DA; Mulligan, CJ; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2019</td>
+    <td class="gt_row gt_left">Perceived discrimination differentially associated with inflammation depending on self-reported race/ethnicity</td>
+    <td class="gt_row gt_left">American Journal Of Human Biology</td>
+    <td class="gt_row gt_left">Quinn, EB; DeCaro, JA; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2019</td>
+    <td class="gt_row gt_left">Region-specific regulation of stem cell-driven regeneration in tapeworms</td>
+    <td class="gt_row gt_left">Elife</td>
+    <td class="gt_row gt_left">Rozario, Tania; Quinn, Edward B; Wang, Jianbin; Davis, Richard E; Newmark, Phillip A; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2016</td>
+    <td class="gt_row gt_left">Discrimination, cultural consonance, and cell-mediated immunity among college students.</td>
+    <td class="gt_row gt_left">American Journal Of Human Biology</td>
+    <td class="gt_row gt_left">Quinn, EB; Decaro, JA; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2016</td>
+    <td class="gt_row gt_left">Discrimination, cultural consonance, and cell-mediated immunity among college students at the University of Alabama</td>
+    <td class="gt_row gt_left">None</td>
+    <td class="gt_row gt_left">Quinn, Edward Bruce; </td>
+  </tr>
+</tbody>
+
+
+</table>
+
+</div>
+        
+</div>
+</div>
+<div id="a6322083" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>gt3 <span class="op">=</span> (</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    gt2</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    .tab_style(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        style<span class="op">=</span>style.text(weight<span class="op">=</span><span class="st">"italic"</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    locations<span class="op">=</span>loc.body(columns<span class="op">=</span><span class="st">"Venue"</span>))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>gt3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div id="elssmjfzqh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#elssmjfzqh table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#elssmjfzqh thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#elssmjfzqh p { margin: 0; padding: 0; }
+ #elssmjfzqh .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #elssmjfzqh .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #elssmjfzqh .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #elssmjfzqh .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #elssmjfzqh .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #elssmjfzqh .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #elssmjfzqh .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #elssmjfzqh .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #elssmjfzqh .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #elssmjfzqh .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #elssmjfzqh .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #elssmjfzqh .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #elssmjfzqh .gt_spanner_row { border-bottom-style: hidden; }
+ #elssmjfzqh .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #elssmjfzqh .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #elssmjfzqh .gt_from_md> :first-child { margin-top: 0; }
+ #elssmjfzqh .gt_from_md> :last-child { margin-bottom: 0; }
+ #elssmjfzqh .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #elssmjfzqh .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #elssmjfzqh .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #elssmjfzqh .gt_row_group_first td { border-top-width: 2px; }
+ #elssmjfzqh .gt_row_group_first th { border-top-width: 2px; }
+ #elssmjfzqh .gt_striped { background-color: rgba(128,128,128,0.05); }
+ #elssmjfzqh .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #elssmjfzqh .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #elssmjfzqh .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #elssmjfzqh .gt_left { text-align: left; }
+ #elssmjfzqh .gt_center { text-align: center; }
+ #elssmjfzqh .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #elssmjfzqh .gt_font_normal { font-weight: normal; }
+ #elssmjfzqh .gt_font_bold { font-weight: bold; }
+ #elssmjfzqh .gt_font_italic { font-style: italic; }
+ #elssmjfzqh .gt_super { font-size: 65%; }
+ #elssmjfzqh .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #elssmjfzqh .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+
+  <tr class="gt_heading">
+    <td colspan="4" class="gt_heading gt_title gt_font_normal">Published Works</td>
+  </tr>
+<tr class="gt_col_headings">
+  <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Year">Year</th>
+  <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Title">Title</th>
+  <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Venue">Venue</th>
+  <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Authors">Authors</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+  <tr>
+    <td class="gt_row gt_right">2025</td>
+    <td class="gt_row gt_left">Epigenetic signatures of intergenerational exposure to violence in three generations of Syrian refugees</td>
+    <td style="font-weight: italic;" class="gt_row gt_left">Scientific Reports</td>
+    <td class="gt_row gt_left">Mulligan, Connie J; Quinn, Edward B; Hamadmad, Dima; Dutton, Christopher L; Nevell, Lisa; Binder, Alexandra M; Panter-Brick, Catherine; Dajani, Rana; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2024</td>
+    <td class="gt_row gt_left">Associations of maternal stress, gene expression, and newborn birthweight in the Democratic Republic of Congo</td>
+    <td style="font-weight: italic;" class="gt_row gt_left">American Journal Of Biological Anthropology</td>
+    <td class="gt_row gt_left">Hsiao, Chu J; Quinn, Edward B; Maisha, Felicien M; Nevell, Lisa D; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2024</td>
+    <td class="gt_row gt_left">Epigenetic signatures of intergenerational exposure to violence</td>
+    <td style="font-weight: italic;" class="gt_row gt_left">American Journal Of Biological Anthropology</td>
+    <td class="gt_row gt_left">Mulligan, Connie J; Quinn, Edward B; Hamadmad, Dima; Dutton, Christopher L; Nevell, Lisa; Binder, Alexandra M; Panter-Brick, Catherine; Dajani, Rana; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2023</td>
+    <td class="gt_row gt_left">Effect of a telephone and web-based problem-solving intervention for stroke caregivers on stroke patient activities of daily living: A randomized controlled trial</td>
+    <td style="font-weight: italic;" class="gt_row gt_left">Clinical Rehabilitation</td>
+    <td class="gt_row gt_left">Quinn, Edward B.; LeLaurin, Jennifer H.; Eliazar-Macke, Nathaniel D.; Orozco, Tatiana; Montague, Magda; Freytes, I. Magaly; Uphold, Constance R.; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2023</td>
+    <td class="gt_row gt_left">Maternal psychosocial stress is associated with reduced diversity in the early infant gut microbiome</td>
+    <td style="font-weight: italic;" class="gt_row gt_left">Microorganisms</td>
+    <td class="gt_row gt_left">Dutton, Christopher L; Maisha, Felicien Masanga; Quinn, Edward B; Morales, Katherine Liceth; Moore, Julie M; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2023</td>
+    <td class="gt_row gt_left">Prenatal maternal stress is associated with site-specific and age acceleration changes in maternal and newborn DNA methylation</td>
+    <td style="font-weight: italic;" class="gt_row gt_left">Epigenetics</td>
+    <td class="gt_row gt_left">Quinn, Edward B; Hsiao, Chu J; Maisha, Felicien M; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2023</td>
+    <td class="gt_row gt_left">Low birthweight is associated with epigenetic age acceleration in the first 3 years of life</td>
+    <td style="font-weight: italic;" class="gt_row gt_left">Evolution, Medicine, And Public Health</td>
+    <td class="gt_row gt_left">Quinn, Edward B; Hsiao, Chu J; Maisha, Felicien M; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2023</td>
+    <td class="gt_row gt_left">The social patterning of vicarious discrimination: Implications for health equity</td>
+    <td style="font-weight: italic;" class="gt_row gt_left">Social Science &amp; Medicine</td>
+    <td class="gt_row gt_left">Quinn, Edward B; Ross, Jessica D; Boston, P Qasimah; Mulligan, Connie J; Gravlee, Clarence C; HEAT Steering Committee; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2022</td>
+    <td class="gt_row gt_left">Associations between perceived discrimination and immune cell composition in the Jackson Heart Study</td>
+    <td style="font-weight: italic;" class="gt_row gt_left">Brain, Behavior, And Immunity</td>
+    <td class="gt_row gt_left">Aronoff, Jacob E; Quinn, Edward B; Forde, Allana T; Glover, Láshauntá M; Reiner, Alexander; McDade, Thomas W; Sims, Mario; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2022</td>
+    <td class="gt_row gt_left">Birthweight predicts epigenetic age acceleration during the first three years of life</td>
+    <td style="font-weight: italic;" class="gt_row gt_left">American Journal Of Biological Anthropology</td>
+    <td class="gt_row gt_left">Quinn, Edward B; Hsiao, Chu J; Maisha, Felicien M; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2022</td>
+    <td class="gt_row gt_left">A Biocultural Approach to Understanding the Impacts of Psychosocial Stress</td>
+    <td style="font-weight: italic;" class="gt_row gt_left">None</td>
+    <td class="gt_row gt_left">Quinn, Edward B; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2021</td>
+    <td class="gt_row gt_left">Gene expression in placental tissue compared with gene expression in venous blood from mothers and newborns in the Democratic Republic of Congo</td>
+    <td style="font-weight: italic;" class="gt_row gt_left">American Journal Of Physical Anthropology</td>
+    <td class="gt_row gt_left">Hsiao, Chu J; Walters, Anna C; Quinn, Edward B; Maisha, Felicien; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2020</td>
+    <td class="gt_row gt_left">Development of a maternal stress measure associated with low birthweight</td>
+    <td style="font-weight: italic;" class="gt_row gt_left">American Journal Of Physical Anthropology</td>
+    <td class="gt_row gt_left">Nevell, Lisa; Clukay, Christopher J; Hsiao, Chu; Quinn, Edward; Maisha, Felicien M; Mulligan, Connie J; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2020</td>
+    <td class="gt_row gt_left">Testing for epigenetic selection in newborns of high stress-exposed mothers in the Democratic Republic of Congo.</td>
+    <td style="font-weight: italic;" class="gt_row gt_left">American Journal Of Human Biology</td>
+    <td class="gt_row gt_left">Quinn, EB; Clukay, CJ; Rodriguez, D; Nevell, LD; Maisha, FM; Kertes, DA; Mulligan, CJ; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2019</td>
+    <td class="gt_row gt_left">Perceived discrimination differentially associated with inflammation depending on self-reported race/ethnicity</td>
+    <td style="font-weight: italic;" class="gt_row gt_left">American Journal Of Human Biology</td>
+    <td class="gt_row gt_left">Quinn, EB; DeCaro, JA; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2019</td>
+    <td class="gt_row gt_left">Region-specific regulation of stem cell-driven regeneration in tapeworms</td>
+    <td style="font-weight: italic;" class="gt_row gt_left">Elife</td>
+    <td class="gt_row gt_left">Rozario, Tania; Quinn, Edward B; Wang, Jianbin; Davis, Richard E; Newmark, Phillip A; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2016</td>
+    <td class="gt_row gt_left">Discrimination, cultural consonance, and cell-mediated immunity among college students.</td>
+    <td style="font-weight: italic;" class="gt_row gt_left">American Journal Of Human Biology</td>
+    <td class="gt_row gt_left">Quinn, EB; Decaro, JA; </td>
+  </tr>
+  <tr>
+    <td class="gt_row gt_right">2016</td>
+    <td class="gt_row gt_left">Discrimination, cultural consonance, and cell-mediated immunity among college students at the University of Alabama</td>
+    <td style="font-weight: italic;" class="gt_row gt_left">None</td>
+    <td class="gt_row gt_left">Quinn, Edward Bruce; </td>
+  </tr>
+</tbody>
+
+
+</table>
 
 </div>
         

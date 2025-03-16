@@ -1,5 +1,8 @@
 ---
 title: "Publications"
+format:
+    html: 
+        html-table-processing: none
 ---
 
 
@@ -14,8 +17,18 @@ from great_tables import GT, loc, style
 Get the data from google scholar
 
 ```{python}
+#| include: false
 
-df = pl.read_csv("citations.csv")
+df = (
+    pl.read_csv("citations.csv")
+    .select(["Year", "Title", "Publication", "Authors"])
+    .rename({"Publication": "Venue"})
+    .sort(by="Year", descending=True)
+    .with_columns(
+        (pl.col("Venue").str.to_titlecase())
+    )
+)
+print(df)
 
 ```
 
@@ -23,9 +36,9 @@ df = pl.read_csv("citations.csv")
 
 ```{python}
 
-gt_table_1 = GT(df)
+gt1 = GT(df)
 
-gt_table_1
+gt1
 
 ```
 
@@ -33,7 +46,27 @@ gt_table_1
 
 ```{python}
 
+gt2 = (
+    gt1
+    .tab_header(title="Published Works")
+)
+
+gt2
+
+```
 
 
+
+```{python}
+
+gt3 = (
+    gt2
+    .tab_style(
+        style=style.text(weight="italic"),
+    locations=loc.body(columns="Venue"))
+
+)
+
+gt3
 
 ```
