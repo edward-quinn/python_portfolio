@@ -21,20 +21,21 @@ about:
 ---
 
 
-Make a gantt chart of career. That would help tell the story.
 
 ```{python}
+#| include: false
 
 import polars as pl
 import matplotlib.pyplot as plt
 import seaborn as sns
 from datetime import datetime
+import numpy as np
 
 ```
 
 
 ```{python}
-
+#| include: false
 
 # Define the data
 data = {
@@ -42,19 +43,20 @@ data = {
         "Graduate Research Assistant", "Graduate Research Assistant", "Human Biomarkers Researcher",
         "Assistant Research Specialist", "M.A. in Medical Anthropology", "Ph.D. in Biological Anthropology",
         "Graduate Research Assistant", "Data Analyst", "Graduate Research Assistant",
-        "Senior Data Analyst", "Compliance and Data Officer", "Data Science Consultant"
+        "Senior Data Analyst", "Compliance and Data Officer", "Data Science Consultant",
+        "M.P.H. Epidemiology Track"
     ],
     "start_date": [
         "August 2014", "May 2015", "May 2016", "September 2016", "August 2014", "August 2018",
-        "August 2018", "June 2021", "August 2018", "March 2023", "May 2024", "May 2024"
+        "August 2018", "June 2021", "August 2018", "March 2023", "May 2024", "May 2024", "August 2019"
     ],
     "end_date": [
         "December 2014", "May 2016", "August 2016", "June 2018", "May 2016", "December 2022",
-        "December 2022", "February 2023", "December 2022", "May 2024", "April 2025", "August 2024"
+        "December 2022", "February 2023", "December 2022", "May 2024", "April 2025", "August 2024", "August 2021"
     ],
     "activity_type": [
         "Research", "Research", "Research", "Research", "Education", "Education",
-        "Research", "Data Analysis", "Research", "Data Analysis", "Data Analysis", "Data Analysis"
+        "Research", "Data Analysis", "Research", "Data Analysis", "Data Analysis", "Data Analysis", "Education"
     ]
 }
 
@@ -74,6 +76,8 @@ print(df)
 
 
 ```{python}
+#| echo: false
+#| output: true
 
 # Define colors for each activity type
 activity_colors = {
@@ -85,20 +89,36 @@ activity_colors = {
 # Create figure and axis
 fig, ax = plt.subplots(figsize=(10, 6))
 
+# Dictionary to track legend entries
+legend_handles = {}
+
 # Generate Gantt bars
 for i, row in enumerate(df.iter_rows(named=True)):
     start = row["start_date"]
     end = row["end_date"]
     activity = row["activity"]
     activity_type = row["activity_type"]
-    
-    ax.barh(activity, (end - start).days, left=start, color=activity_colors.get(activity_type, "gray"))
+    color = activity_colors.get(activity_type, "gray")
 
+    # Add label only once per activity type
+    label = activity_type if activity_type not in legend_handles else None
+    handle = ax.barh(activity, (end - start).days, left=start, color=color, label=label)
+    
+    if label:
+        legend_handles[activity_type] = handle  # Store handle to prevent duplicate labels
 
 # Labels and title
+ax.set_title("Research, Data Analysis, and Graduate Education since 2014")
+ax.spines[["top", "right"]].set_visible(False)
+ax.tick_params(length=0)
 
-ax.set_ylabel("Activity")
-ax.set_title("Gantt Chart of Activities")
+# Set x-axis ticks to show years from 2014 to 2025
+years = np.arange(2014, 2026, 1)
+ax.set_xticks([np.datetime64(str(y)) for y in years])
+ax.set_xticklabels(years)
+
+# Add legend
+ax.legend(title="")
 
 plt.show()
 

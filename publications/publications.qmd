@@ -1,0 +1,39 @@
+---
+title: "Publications"
+---
+
+
+```{python}
+
+import polars as pl
+import polars.selectors as cs 
+from great_tables import GT, loc, style
+
+```
+
+Get the data from google scholar
+
+```{python}
+
+df = pl.read_csv("citations.csv")
+
+```
+
+
+
+```{python}
+
+gt_table_1 = GT(df)
+
+gt_table_1
+
+```
+
+
+
+```{python}
+
+
+
+
+```

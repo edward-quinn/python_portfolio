@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -137,7 +103,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Resume</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./publications.html"> 
+    <a class="nav-link" href="./publications/publications.html"> 
 <span class="menu-text">Publications</span></a>
   </li>  
 </ul>
@@ -163,96 +129,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-title-meta">
   </div>
 </header><main class="content" id="quarto-document-content">
-<p>Make a gantt chart of career. That would help tell the story.</p>
-<div id="d4220143" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="792dc673" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the data</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"activity"</span>: [</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Graduate Research Assistant"</span>, <span class="st">"Graduate Research Assistant"</span>, <span class="st">"Human Biomarkers Researcher"</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Assistant Research Specialist"</span>, <span class="st">"M.A. in Medical Anthropology"</span>, <span class="st">"Ph.D. in Biological Anthropology"</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Graduate Research Assistant"</span>, <span class="st">"Data Analyst"</span>, <span class="st">"Graduate Research Assistant"</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Senior Data Analyst"</span>, <span class="st">"Compliance and Data Officer"</span>, <span class="st">"Data Science Consultant"</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"start_date"</span>: [</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"August 2014"</span>, <span class="st">"May 2015"</span>, <span class="st">"May 2016"</span>, <span class="st">"September 2016"</span>, <span class="st">"August 2014"</span>, <span class="st">"August 2018"</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"August 2018"</span>, <span class="st">"June 2021"</span>, <span class="st">"August 2018"</span>, <span class="st">"March 2023"</span>, <span class="st">"May 2024"</span>, <span class="st">"May 2024"</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"end_date"</span>: [</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"December 2014"</span>, <span class="st">"May 2016"</span>, <span class="st">"August 2016"</span>, <span class="st">"June 2018"</span>, <span class="st">"May 2016"</span>, <span class="st">"December 2022"</span>,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"December 2022"</span>, <span class="st">"February 2023"</span>, <span class="st">"December 2022"</span>, <span class="st">"May 2024"</span>, <span class="st">"April 2025"</span>, <span class="st">"August 2024"</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"activity_type"</span>: [</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Research"</span>, <span class="st">"Research"</span>, <span class="st">"Research"</span>, <span class="st">"Research"</span>, <span class="st">"Education"</span>, <span class="st">"Education"</span>,</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Research"</span>, <span class="st">"Data Analysis"</span>, <span class="st">"Research"</span>, <span class="st">"Data Analysis"</span>, <span class="st">"Data Analysis"</span>, <span class="st">"Data Analysis"</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to Polars DataFrame and adjust date format</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.DataFrame(data).with_columns([</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"start_date"</span>) <span class="op">+</span> <span class="st">"-01"</span>).<span class="bu">str</span>.strptime(pl.Date, <span class="st">"%B %Y-</span><span class="sc">%d</span><span class="st">"</span>, strict<span class="op">=</span><span class="va">False</span>),</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">"end_date"</span>) <span class="op">+</span> <span class="st">"-01"</span>).<span class="bu">str</span>.strptime(pl.Date, <span class="st">"%B %Y-</span><span class="sc">%d</span><span class="st">"</span>, strict<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>]).sort(<span class="st">"start_date"</span>, descending<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the DataFrame</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>shape: (12, 4)
-┌─────────────────────────────────┬────────────┬────────────┬───────────────┐
-│ activity                        ┆ start_date ┆ end_date   ┆ activity_type │
-│ ---                             ┆ ---        ┆ ---        ┆ ---           │
-│ str                             ┆ date       ┆ date       ┆ str           │
-╞═════════════════════════════════╪════════════╪════════════╪═══════════════╡
-│ Compliance and Data Officer     ┆ 2024-05-01 ┆ 2025-04-01 ┆ Data Analysis │
-│ Data Science Consultant         ┆ 2024-05-01 ┆ 2024-08-01 ┆ Data Analysis │
-│ Senior Data Analyst             ┆ 2023-03-01 ┆ 2024-05-01 ┆ Data Analysis │
-│ Data Analyst                    ┆ 2021-06-01 ┆ 2023-02-01 ┆ Data Analysis │
-│ Ph.D. in Biological Anthropolo… ┆ 2018-08-01 ┆ 2022-12-01 ┆ Education     │
-│ …                               ┆ …          ┆ …          ┆ …             │
-│ Assistant Research Specialist   ┆ 2016-09-01 ┆ 2018-06-01 ┆ Research      │
-│ Human Biomarkers Researcher     ┆ 2016-05-01 ┆ 2016-08-01 ┆ Research      │
-│ Graduate Research Assistant     ┆ 2015-05-01 ┆ 2016-05-01 ┆ Research      │
-│ Graduate Research Assistant     ┆ 2014-08-01 ┆ 2014-12-01 ┆ Research      │
-│ M.A. in Medical Anthropology    ┆ 2014-08-01 ┆ 2016-05-01 ┆ Education     │
-└─────────────────────────────────┴────────────┴────────────┴───────────────┘</code></pre>
-</div>
-</div>
-<div id="77a0743d" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define colors for each activity type</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>activity_colors <span class="op">=</span> {</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Research"</span>: <span class="st">"tab:blue"</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Education"</span>: <span class="st">"tab:green"</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Data Analysis"</span>: <span class="st">"tab:orange"</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create figure and axis</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate Gantt bars</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, row <span class="kw">in</span> <span class="bu">enumerate</span>(df.iter_rows(named<span class="op">=</span><span class="va">True</span>)):</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    start <span class="op">=</span> row[<span class="st">"start_date"</span>]</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    end <span class="op">=</span> row[<span class="st">"end_date"</span>]</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    activity <span class="op">=</span> row[<span class="st">"activity"</span>]</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    activity_type <span class="op">=</span> row[<span class="st">"activity_type"</span>]</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    ax.barh(activity, (end <span class="op">-</span> start).days, left<span class="op">=</span>start, color<span class="op">=</span>activity_colors.get(activity_type, <span class="st">"gray"</span>))</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels and title</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Activity"</span>)</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Gantt Chart of Activities"</span>)</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="bd7d55b8" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/cell-4-output-1.png" width="1004" height="505" class="figure-img"></p>
+<p><img src="index_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>

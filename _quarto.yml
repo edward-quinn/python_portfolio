@@ -11,7 +11,7 @@ website:
         text: Data Science Projects
       - href: resume.qmd
         text: Resume
-      - href: publications.qmd
+      - href: publications/publications.qmd
         text: Publications
 
 
