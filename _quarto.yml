@@ -7,12 +7,8 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: machine_learning.qmd
-        text: Machine Learning
-      - href: data_visualization.qmd
-        text: Data Visualization
-      - href: tidying_data.qmd
-        text: Tidying Data
+      - href: projects.qmd
+        text: Data Science Projects
       - href: resume.qmd
         text: Resume
       - href: publications.qmd

@@ -25,7 +25,7 @@
     "href": "index.html",
     "title": "Edward B. Quinn, PhD, MPH",
     "section": "",
-    "text": "Make a gantt chart of career. That would help tell the story."
+    "text": "Make a gantt chart of career. That would help tell the story.\n\nimport polars as pl\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom datetime import datetime\n\n\n# Define the data\ndata = {\n    \"activity\": [\n        \"Graduate Research Assistant\", \"Graduate Research Assistant\", \"Human Biomarkers Researcher\",\n        \"Assistant Research Specialist\", \"M.A. in Medical Anthropology\", \"Ph.D. in Biological Anthropology\",\n        \"Graduate Research Assistant\", \"Data Analyst\", \"Graduate Research Assistant\",\n        \"Senior Data Analyst\", \"Compliance and Data Officer\", \"Data Science Consultant\"\n    ],\n    \"start_date\": [\n        \"August 2014\", \"May 2015\", \"May 2016\", \"September 2016\", \"August 2014\", \"August 2018\",\n        \"August 2018\", \"June 2021\", \"August 2018\", \"March 2023\", \"May 2024\", \"May 2024\"\n    ],\n    \"end_date\": [\n        \"December 2014\", \"May 2016\", \"August 2016\", \"June 2018\", \"May 2016\", \"December 2022\",\n        \"December 2022\", \"February 2023\", \"December 2022\", \"May 2024\", \"April 2025\", \"August 2024\"\n    ],\n    \"activity_type\": [\n        \"Research\", \"Research\", \"Research\", \"Research\", \"Education\", \"Education\",\n        \"Research\", \"Data Analysis\", \"Research\", \"Data Analysis\", \"Data Analysis\", \"Data Analysis\"\n    ]\n}\n\n# Convert to Polars DataFrame and adjust date format\ndf = pl.DataFrame(data).with_columns([\n    (pl.col(\"start_date\") + \"-01\").str.strptime(pl.Date, \"%B %Y-%d\", strict=False),\n    (pl.col(\"end_date\") + \"-01\").str.strptime(pl.Date, \"%B %Y-%d\", strict=False)\n]).sort(\"start_date\", descending=True)\n\n# Show the DataFrame\nprint(df)\n\nshape: (12, 4)\n┌─────────────────────────────────┬────────────┬────────────┬───────────────┐\n│ activity                        ┆ start_date ┆ end_date   ┆ activity_type │\n│ ---                             ┆ ---        ┆ ---        ┆ ---           │\n│ str                             ┆ date       ┆ date       ┆ str           │\n╞═════════════════════════════════╪════════════╪════════════╪═══════════════╡\n│ Compliance and Data Officer     ┆ 2024-05-01 ┆ 2025-04-01 ┆ Data Analysis │\n│ Data Science Consultant         ┆ 2024-05-01 ┆ 2024-08-01 ┆ Data Analysis │\n│ Senior Data Analyst             ┆ 2023-03-01 ┆ 2024-05-01 ┆ Data Analysis │\n│ Data Analyst                    ┆ 2021-06-01 ┆ 2023-02-01 ┆ Data Analysis │\n│ Ph.D. in Biological Anthropolo… ┆ 2018-08-01 ┆ 2022-12-01 ┆ Education     │\n│ …                               ┆ …          ┆ …          ┆ …             │\n│ Assistant Research Specialist   ┆ 2016-09-01 ┆ 2018-06-01 ┆ Research      │\n│ Human Biomarkers Researcher     ┆ 2016-05-01 ┆ 2016-08-01 ┆ Research      │\n│ Graduate Research Assistant     ┆ 2015-05-01 ┆ 2016-05-01 ┆ Research      │\n│ Graduate Research Assistant     ┆ 2014-08-01 ┆ 2014-12-01 ┆ Research      │\n│ M.A. in Medical Anthropology    ┆ 2014-08-01 ┆ 2016-05-01 ┆ Education     │\n└─────────────────────────────────┴────────────┴────────────┴───────────────┘\n\n\n\n# Define colors for each activity type\nactivity_colors = {\n    \"Research\": \"tab:blue\",\n    \"Education\": \"tab:green\",\n    \"Data Analysis\": \"tab:orange\"\n}\n\n# Create figure and axis\nfig, ax = plt.subplots(figsize=(10, 6))\n\n# Generate Gantt bars\nfor i, row in enumerate(df.iter_rows(named=True)):\n    start = row[\"start_date\"]\n    end = row[\"end_date\"]\n    activity = row[\"activity\"]\n    activity_type = row[\"activity_type\"]\n    \n    ax.barh(activity, (end - start).days, left=start, color=activity_colors.get(activity_type, \"gray\"))\n\n\n# Labels and title\n\nax.set_ylabel(\"Activity\")\nax.set_title(\"Gantt Chart of Activities\")\n\nplt.show()"
   },
   {
     "objectID": "data_visualization.html",
@@ -51,6 +51,41 @@
   {
     "objectID": "machine_learning.html#now-get-the-data",
     "href": "machine_learning.html#now-get-the-data",
+    "title": "Machine Learning",
+    "section": "Now get the data",
+    "text": "Now get the data"
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Python Data Science Projects",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMachine Learning\n\n\n\n\n\n\n\n\n\n\n\nEdward B. Quinn, Ph.D., MPH\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "projects/data_visualization.html",
+    "href": "projects/data_visualization.html",
+    "title": "Data Visualization",
+    "section": "",
+    "text": "import polars as pl\nimport seaborn as sns\nimport matplotlib as plt\n\n\ndf = (\n    pl.read_csv(\"death_rates.csv\")\n    .with_columns(pl.col(\"Year\")\n    .cast(pl.Utf8)\n    .str.to_date(format=\"%Y\"))\n)\n\n\ndf.head()\n\n\nshape: (5, 3)\n\n\n\nYear\nCause\nAge Adjusted Death Rate\n\n\ndate\nstr\nf64\n\n\n\n\n1900-01-01\n\"Heart Disease\"\n265.4\n\n\n1901-01-01\n\"Heart Disease\"\n272.6\n\n\n1902-01-01\n\"Heart Disease\"\n285.2\n\n\n1903-01-01\n\"Heart Disease\"\n304.5\n\n\n1904-01-01\n\"Heart Disease\"\n331.5\n\n\n\n\n\n\nThe year column is an integer. Make a new column where the year is a date time.\nNow make a single line chart for all leading causes of death.\n\nsns.lineplot(data = df, x = 'Year', y = 'Age Adjusted Death Rate', hue = 'Cause')\n\n\n\n\n\n\n\n\nTo make sure the _brand.yml style is applied to the matplotlib style sheet, see this video tutorial: https://www.youtube.com/watch?v=U48y0_yzEPY."
+  },
+  {
+    "objectID": "projects/machine_learning.html",
+    "href": "projects/machine_learning.html",
+    "title": "Machine Learning",
+    "section": "",
+    "text": "import polars as pl"
+  },
+  {
+    "objectID": "projects/machine_learning.html#markdown-text",
+    "href": "projects/machine_learning.html#markdown-text",
+    "title": "Machine Learning",
+    "section": "",
+    "text": "import polars as pl"
+  },
+  {
+    "objectID": "projects/machine_learning.html#now-get-the-data",
+    "href": "projects/machine_learning.html#now-get-the-data",
     "title": "Machine Learning",
     "section": "Now get the data",
     "text": "Now get the data"
