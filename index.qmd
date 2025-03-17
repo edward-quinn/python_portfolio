@@ -30,6 +30,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from datetime import datetime
 import numpy as np
+from mplstyle import mplstyle_from_brand
+from brand_yml import Brand
+
+mplstyle_from_brand("_brand.yml")
 
 ```
 
@@ -79,17 +83,20 @@ print(df)
 #| echo: false
 #| output: true
 
-# Define colors for each activity type
+# Load the brand information to access the palette directly.
+brand = Brand.from_yaml("_brand.yml")
+
+# Define colors for each activity type using your brand palette
 activity_colors = {
-    "Research": "tab:blue",
-    "Education": "tab:green",
-    "Data Analysis": "tab:orange"
+    "Research": brand.color.palette["violet"],
+    "Education": brand.color.palette["teal"],      # using the primary teal from your theme
+    "Data Analysis": brand.color.palette["red"]
 }
 
 # Create figure and axis
 fig, ax = plt.subplots(figsize=(10, 6))
 
-# Dictionary to track legend entries
+# Dictionary to track legend entries (to avoid duplicate labels)
 legend_handles = {}
 
 # Generate Gantt bars
@@ -98,18 +105,20 @@ for i, row in enumerate(df.iter_rows(named=True)):
     end = row["end_date"]
     activity = row["activity"]
     activity_type = row["activity_type"]
-    color = activity_colors.get(activity_type, "gray")
+    # Use the brand color if available; default to a neutral grey otherwise.
+    color = activity_colors.get(activity_type, brand.color.palette.get("grey", "gray"))
 
     # Add label only once per activity type
     label = activity_type if activity_type not in legend_handles else None
     handle = ax.barh(activity, (end - start).days, left=start, color=color, label=label)
     
     if label:
-        legend_handles[activity_type] = handle  # Store handle to prevent duplicate labels
+        legend_handles[activity_type] = handle
 
 # Labels and title
 ax.set_title("Research, Data Analysis, and Graduate Education since 2014")
-ax.spines[["top", "right"]].set_visible(False)
+ax.spines["top"].set_visible(False)
+ax.spines["right"].set_visible(False)
 ax.tick_params(length=0)
 
 # Set x-axis ticks to show years from 2014 to 2025

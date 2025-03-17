@@ -1,41 +1,104 @@
-meta: 
-  name: Example Company
-  link: 
-    github: https://github.com/skaltman/brand-yml-blog
+meta:
+  name:
+    short: DataTech
+    full: DataTech Innovations Inc.
+  link:
+    home: https://www.datatechinnovations.com
+    github: https://github.com/datatechinnovations
+    linkedin: https://www.linkedin.com/company/datatechinnovations
+    twitter: https://twitter.com/datatech_innov
 
-logo: 
-  medium: logos/logo.png
+# logo:
+#   images:
+#     header: logos/header-logo.png   # Place your header logo in the logos folder
+#     header-white: logos/header-logo-white.png
+#     full:
+#       path: logos/full-logo.svg
+#       alt: "DataTech full logo"
+#   small: logos/icon.png
+#   medium:
+#     light: header
+#     dark: header-white
+#   large: full
 
 color:
   palette:
-    black: "#1C2826"
-    blue: "#0C0A3E" 
-    gray: "#2A2E45"
-    neutral: "#F9F7F1" 
-    red: "#BA274A"
-    violet: "#4D6CFA"
-  background: neutral
-  foreground: black
-  primary: blue
-  secondary: violet
-  info: red
+    white: "#FFFFFF"
+    black: "#212121"
+    grey: "#ECEFF1"
+    neutral: "#F5F5F5"   # A light neutral background for high usability
+    teal: "#009688"      # Primary color with personality
+    blue: "#0288D1"      # Secondary accent color
+    green: "#4CAF50"     # Success messages
+    orange: "#FF9800"    # Warnings
+    purple: "#9C27B0"    # Informational accents
+    violet: "#8E24AA"    # Additional vibrant violet for plotting cycles
+    red: "#F44336"       # Danger/alerts
+
+  foreground: black      # Main text color for readability
+  background: white      # Overall background color
+  primary: teal          # Primary brand color for buttons, links, etc.
+  secondary: blue        # Secondary accent color
+  success: green
+  info: purple
+  warning: orange
+  danger: red
+  light: white
+  dark: "#37474F"        # For accents where a darker tone is needed
 
 typography:
   fonts:
-    - family: Nunito Sans
+    - family: Roboto
       source: google
-    - family: Montserrat
+      weight: [400, 700]
+      style: [normal, italic]
+    - family: Source Code Pro
       source: google
-    - family: Fira Code
-      source: google
-
-  base: Nunito Sans
+      weight: [400, 600]
+      style: [normal, italic]
+  base:
+    family: Roboto
+    weight: 400
+    size: 16px
+    line-height: 1.6
   headings:
-    family: Montserrat
+    family: Roboto
     weight: 700
-    color: primary
-  monospace: Fira Code
-
+    style: normal
+    line-height: 1.3
+    color: black
+  monospace:
+    family: Source Code Pro
+    weight: 400
+    size: 0.95em
+  monospace-inline:
+    color: "#D32F2F"
+    background-color: "#F5F5F5"
+  monospace-block:
+    color: foreground
+    background-color: background
+    line-height: 1.4
   link:
-    color: info
+    weight: 600
+    color: teal
+    background-color: transparent
     decoration: underline
+
+# defaults:
+#   bootstrap:
+#     functions: ""    # Add custom SCSS functions if needed
+#     defaults: {}     # Map Bootstrap variables to your brand values here
+#     mixins: ""       # Include any custom mixins if necessary
+#     rules: ""        # Additional SCSS rules can be added here
+#   quarto:
+#     format: {}       # Specify Quarto-specific format options here
+#   shiny:
+#     theme:
+#       defaults:
+#         navbar-bg: $brand-primary  # Set the navbar background to the primary color (teal)
+#       rules: |
+#         /* Ensure white text in the navbar for optimal contrast */
+#         .navbar .navbar-brand,
+#         .navbar .navbar-nav > li > a {
+#           color: $brand-light !important;
+#         }
