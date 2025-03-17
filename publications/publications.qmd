@@ -7,27 +7,40 @@ format:
 
 
 ```{python}
+#| include: false
 
 import polars as pl
 import polars.selectors as cs 
 from great_tables import GT, loc, style
+from pyprojroot.here import here
+
+here()
 
 ```
 
-Get the data from google scholar
+
 
 ```{python}
 #| include: false
 
 df = (
-    pl.read_csv("citations.csv")
+    pl.read_csv(here("publications/citations.csv"))
     .select(["Year", "Title", "Publication", "Authors"])
     .rename({"Publication": "Venue"})
     .sort(by="Year", descending=True)
     .with_columns(
-        (pl.col("Venue").str.to_titlecase())
+        pl.col("Venue").str.to_titlecase()
+    )
+    .with_columns(
+        pl.when(pl.col("Title") == "A Biocultural Approach to Understanding the Impacts of Psychosocial Stress")
+        .then(pl.lit("University of Florida"))
+        .when(pl.col("Title") == "Discrimination, cultural consonance, and cell-mediated immunity among college students at the University of Alabama")
+        .then(pl.lit("University of Alabama"))
+        .otherwise(pl.col("Venue"))
+        .alias("Venue")
     )
 )
+
 print(df)
 
 ```
@@ -35,38 +48,22 @@ print(df)
 
 
 ```{python}
+#| echo: false
+#| output: true
 
-gt1 = GT(df)
+gt1 = (
+    GT(df)
+    .tab_style(
+        style=style.text(style='italic'),
+        locations=loc.body(columns="Venue"))
+    # .tab_style(
+    #     style=style.text(align="center"),
+    #     locations=loc.column_labels()
+    # )
+    .opt_horizontal_padding(scale=3)
+)
 
 gt1
 
 ```
 
-
-
-```{python}
-
-gt2 = (
-    gt1
-    .tab_header(title="Published Works")
-)
-
-gt2
-
-```
-
-
-
-```{python}
-
-gt3 = (
-    gt2
-    .tab_style(
-        style=style.text(weight="italic"),
-    locations=loc.body(columns="Venue"))
-
-)
-
-gt3
-
-```
