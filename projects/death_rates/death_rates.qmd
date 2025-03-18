@@ -1,6 +1,9 @@
 ---
-title: "Leading Causes of Death 1990-2018"
-toc: true
+title: "Progress in Public Health"
+categories: [Data Visualization]
+format:
+    html:
+        toc: true
 ---
 
 
@@ -9,17 +12,17 @@ toc: true
 
 import polars as pl
 import seaborn as sns
-import matplotlib as plt
-from mplstyle import mplstyle_from_brand
-from brand_yml import Brand
-
+import matplotlib.pyplot as plt
 from pyprojroot.here import here
+import datetime
 
-mplstyle_from_brand(here("_brand.yml"))
+# from mplstyle import mplstyle_from_brand
+# from brand_yml import Brand
+# mplstyle_from_brand(here("_brand.yml"))
 
 ```
 
-
+# Read in Data
 
 ```{python}
 
@@ -30,26 +33,84 @@ df = (
     .str.to_date(format="%Y"))
 )
 
+df.glimpse()
+
 ```
 
-
-
+# Initial Plot
 
 ```{python}
 
-df.head()
+fig, ax = plt.subplots()
+
+
+for cause, group in df.group_by("Cause"):
+    ax.plot(group["Year"], group["Age Adjusted Death Rate"], label=cause, linewidth=2.5)
+
+
+ax.spines["top"].set_visible(False)
+ax.spines["right"].set_visible(False)
+ax.tick_params(length=0)
+ax.legend(title="Cause")
+ax.set_title("Initial Rough Plot")
+
+plt.show()
 
 ```
 
-The `year` column is an integer. Make a new column where the year is a date time.
+Let's focus on a single disease in the data. This allows for better understanding of the patterns.
 
-
-Now make a single line chart for all leading causes of death.
+# Heart Disease
 
 ```{python}
 
-sns.lineplot(data = df, x = 'Year', y = 'Age Adjusted Death Rate', hue = 'Cause')
+# Ensure the 'Year' column is a date type
+df_heart = (
+    df
+    .filter(pl.col("Cause") == "Heart Disease")
+)
 
+# Split the data into two parts: before (and including) 2000 and after 2000
+cutoff = pl.lit("2000-01-01").str.to_date()
+df_old = df_heart.filter(pl.col("Year") <= cutoff)
+df_new = df_heart.filter(pl.col("Year") >= cutoff)
+
+fig, ax = plt.subplots()
+
+# Plot the segment for years <= 2000 in skyblue
+ax.plot(
+    df_old["Year"],
+    df_old["Age Adjusted Death Rate"],
+    linewidth=2.5,
+    color="skyblue"
+)
+
+# Plot the segment for years > 2000 in lightgrey
+ax.plot(
+    df_new["Year"],
+    df_new["Age Adjusted Death Rate"],
+    linewidth=2.5,
+    color="lightgrey"
+)
+
+# Extract the rate for the year 1900
+rate_1900 = df_heart.filter(pl.col("Year") == datetime.date(1900, 1, 1))["Age Adjusted Death Rate"].item()
+
+# Add a dashed horizontal line from 1900 to 2000 at rate_1900
+ax.hlines(
+    y=rate_1900,
+    xmin=datetime.date(1900, 1, 1),
+    xmax=datetime.date(2000, 1, 1),
+    colors="black",
+    linestyles="--"
+)
+
+# Style the plot
+ax.spines["top"].set_visible(False)
+ax.spines["right"].set_visible(False)
+ax.tick_params(length=0)
+ax.set_title("It took 100 years for the Heart Disease Death Rate to recover to levels observed in 1900")
+
+
+plt.show()
 ```
-
-To make sure the _brand.yml style is applied to the matplotlib style sheet, see this video tutorial: https://www.youtube.com/watch?v=U48y0_yzEPY.

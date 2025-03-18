@@ -1,6 +1,9 @@
 ---
 title: "Predicting Incidence of Diabetes"
-toc: true
+categories: [Machine Learning, Random Forest]
+format:
+    html:
+        toc: true
 ---
 
 

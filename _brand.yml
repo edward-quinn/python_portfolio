@@ -8,18 +8,18 @@ meta:
     linkedin: https://www.linkedin.com/company/datatechinnovations
     twitter: https://twitter.com/datatech_innov
 
-# logo:
-#   images:
-#     header: logos/header-logo.png   # Place your header logo in the logos folder
-#     header-white: logos/header-logo-white.png
-#     full:
-#       path: logos/full-logo.svg
-#       alt: "DataTech full logo"
-#   small: logos/icon.png
-#   medium:
-#     light: header
-#     dark: header-white
-#   large: full
+logo:
+  images:
+    header: logos/eq_logo_medium_white.svg   # Place your header logo in the logos folder
+    header-white: logos/eq_logo_medium_white.svg
+    full:
+      path: logos/eq_logo_medium_white.svg
+      alt: "DataTech full logo"
+  small: logos/eq_logo_medium_white.svg
+  medium:
+    light: header
+    dark: header-white
+  large: full
 
 color:
   palette:
