@@ -1,5 +1,6 @@
 ---
-title: "Edward B. Quinn, PhD, MPH"
+title: "Edward B. Quinn, PhD, MPH <br><br> *Experienced Data Scientist*"
+
 image: edward_quinn_min.jpeg
 about:
     template: jolla
@@ -116,7 +117,7 @@ for i, row in enumerate(df.iter_rows(named=True)):
         legend_handles[activity_type] = handle
 
 # Labels and title
-ax.set_title("Experienced Data Scientist")
+
 ax.spines["top"].set_visible(False)
 ax.spines["right"].set_visible(False)
 ax.tick_params(length=0)
