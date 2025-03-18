@@ -1,13 +1,18 @@
 ---
-title: "Data Visualization"
+title: "Leading Causes of Death 1990-2018"
+toc: true
 ---
 
 
 ```{python}
+#| include: false
 
 import polars as pl
 import seaborn as sns
 import matplotlib as plt
+
+from pyprojroot.here import here
+
 
 
 ```
@@ -17,7 +22,7 @@ import matplotlib as plt
 ```{python}
 
 df = (
-    pl.read_csv("death_rates.csv")
+    pl.read_csv(here("projects/death_rates/death_rates.csv"))
     .with_columns(pl.col("Year")
     .cast(pl.Utf8)
     .str.to_date(format="%Y"))

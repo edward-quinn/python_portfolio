@@ -4,35 +4,35 @@
     "href": "projects.html",
     "title": "Python Data Science Projects",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMachine Learning\n\n\n\n\n\n\n\n\n\n\n\nEdward B. Quinn, Ph.D., MPH\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nLeading Causes of Death 1990-2018\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPredicting Incidence of Diabetes\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "projects/data_visualization.html",
-    "href": "projects/data_visualization.html",
-    "title": "Data Visualization",
+    "objectID": "projects/death_rates/death_rates.html",
+    "href": "projects/death_rates/death_rates.html",
+    "title": "Leading Causes of Death 1990-2018",
     "section": "",
-    "text": "import polars as pl\nimport seaborn as sns\nimport matplotlib as plt\n\n\ndf = (\n    pl.read_csv(\"death_rates.csv\")\n    .with_columns(pl.col(\"Year\")\n    .cast(pl.Utf8)\n    .str.to_date(format=\"%Y\"))\n)\n\n\ndf.head()\n\n\nshape: (5, 3)\n\n\n\nYear\nCause\nAge Adjusted Death Rate\n\n\ndate\nstr\nf64\n\n\n\n\n1900-01-01\n\"Heart Disease\"\n265.4\n\n\n1901-01-01\n\"Heart Disease\"\n272.6\n\n\n1902-01-01\n\"Heart Disease\"\n285.2\n\n\n1903-01-01\n\"Heart Disease\"\n304.5\n\n\n1904-01-01\n\"Heart Disease\"\n331.5\n\n\n\n\n\n\nThe year column is an integer. Make a new column where the year is a date time.\nNow make a single line chart for all leading causes of death.\n\nsns.lineplot(data = df, x = 'Year', y = 'Age Adjusted Death Rate', hue = 'Cause')\n\n\n\n\n\n\n\n\nTo make sure the _brand.yml style is applied to the matplotlib style sheet, see this video tutorial: https://www.youtube.com/watch?v=U48y0_yzEPY."
+    "text": "df = (\n    pl.read_csv(here(\"projects/death_rates/death_rates.csv\"))\n    .with_columns(pl.col(\"Year\")\n    .cast(pl.Utf8)\n    .str.to_date(format=\"%Y\"))\n)\n\n\ndf.head()\n\n\nshape: (5, 3)\n\n\n\nYear\nCause\nAge Adjusted Death Rate\n\n\ndate\nstr\nf64\n\n\n\n\n1900-01-01\n\"Heart Disease\"\n265.4\n\n\n1901-01-01\n\"Heart Disease\"\n272.6\n\n\n1902-01-01\n\"Heart Disease\"\n285.2\n\n\n1903-01-01\n\"Heart Disease\"\n304.5\n\n\n1904-01-01\n\"Heart Disease\"\n331.5\n\n\n\n\n\n\nThe year column is an integer. Make a new column where the year is a date time.\nNow make a single line chart for all leading causes of death.\n\nsns.lineplot(data = df, x = 'Year', y = 'Age Adjusted Death Rate', hue = 'Cause')\n\n\n\n\n\n\n\n\nTo make sure the _brand.yml style is applied to the matplotlib style sheet, see this video tutorial: https://www.youtube.com/watch?v=U48y0_yzEPY."
   },
   {
-    "objectID": "projects/machine_learning.html",
-    "href": "projects/machine_learning.html",
-    "title": "Machine Learning",
+    "objectID": "projects/diabetes/diabetes.html",
+    "href": "projects/diabetes/diabetes.html",
+    "title": "Predicting Incidence of Diabetes",
     "section": "",
-    "text": "import polars as pl"
+    "text": "import polars as pl\nimport matplotlib.pyplot as plt\n\n\nfrom pyprojroot.here import here"
   },
   {
-    "objectID": "projects/machine_learning.html#markdown-text",
-    "href": "projects/machine_learning.html#markdown-text",
-    "title": "Machine Learning",
+    "objectID": "projects/diabetes/diabetes.html#markdown-text",
+    "href": "projects/diabetes/diabetes.html#markdown-text",
+    "title": "Predicting Incidence of Diabetes",
     "section": "",
-    "text": "import polars as pl"
+    "text": "import polars as pl\nimport matplotlib.pyplot as plt\n\n\nfrom pyprojroot.here import here"
   },
   {
-    "objectID": "projects/machine_learning.html#now-get-the-data",
-    "href": "projects/machine_learning.html#now-get-the-data",
-    "title": "Machine Learning",
+    "objectID": "projects/diabetes/diabetes.html#now-get-the-data",
+    "href": "projects/diabetes/diabetes.html#now-get-the-data",
+    "title": "Predicting Incidence of Diabetes",
     "section": "Now get the data",
-    "text": "Now get the data"
+    "text": "Now get the data\n\ndf = pl.read_csv(here(\"projects/diabetes/diabetes.csv\"))\n\nprint(df)\n\nshape: (768, 9)\n┌─────────────┬─────────┬───────────────┬───────────────┬───┬──────┬───────────────┬─────┬─────────┐\n│ Pregnancies ┆ Glucose ┆ BloodPressure ┆ SkinThickness ┆ … ┆ BMI  ┆ DiabetesPedig ┆ Age ┆ Outcome │\n│ ---         ┆ ---     ┆ ---           ┆ ---           ┆   ┆ ---  ┆ reeFunction   ┆ --- ┆ ---     │\n│ i64         ┆ i64     ┆ i64           ┆ i64           ┆   ┆ f64  ┆ ---           ┆ i64 ┆ i64     │\n│             ┆         ┆               ┆               ┆   ┆      ┆ f64           ┆     ┆         │\n╞═════════════╪═════════╪═══════════════╪═══════════════╪═══╪══════╪═══════════════╪═════╪═════════╡\n│ 6           ┆ 148     ┆ 72            ┆ 35            ┆ … ┆ 33.6 ┆ 0.627         ┆ 50  ┆ 1       │\n│ 1           ┆ 85      ┆ 66            ┆ 29            ┆ … ┆ 26.6 ┆ 0.351         ┆ 31  ┆ 0       │\n│ 8           ┆ 183     ┆ 64            ┆ 0             ┆ … ┆ 23.3 ┆ 0.672         ┆ 32  ┆ 1       │\n│ 1           ┆ 89      ┆ 66            ┆ 23            ┆ … ┆ 28.1 ┆ 0.167         ┆ 21  ┆ 0       │\n│ 0           ┆ 137     ┆ 40            ┆ 35            ┆ … ┆ 43.1 ┆ 2.288         ┆ 33  ┆ 1       │\n│ …           ┆ …       ┆ …             ┆ …             ┆ … ┆ …    ┆ …             ┆ …   ┆ …       │\n│ 10          ┆ 101     ┆ 76            ┆ 48            ┆ … ┆ 32.9 ┆ 0.171         ┆ 63  ┆ 0       │\n│ 2           ┆ 122     ┆ 70            ┆ 27            ┆ … ┆ 36.8 ┆ 0.34          ┆ 27  ┆ 0       │\n│ 5           ┆ 121     ┆ 72            ┆ 23            ┆ … ┆ 26.2 ┆ 0.245         ┆ 30  ┆ 0       │\n│ 1           ┆ 126     ┆ 60            ┆ 0             ┆ … ┆ 30.1 ┆ 0.349         ┆ 47  ┆ 1       │\n│ 1           ┆ 93      ┆ 70            ┆ 31            ┆ … ┆ 30.4 ┆ 0.315         ┆ 23  ┆ 0       │\n└─────────────┴─────────┴───────────────┴───────────────┴───┴──────┴───────────────┴─────┴─────────┘\n\n\n\nfig, ax = plt.subplots()\nax.scatter(\n    x = df[\"SkinThickness\"],\n    y = df[\"BloodPressure\"]\n)"
   },
   {
     "objectID": "publications/publications.html",

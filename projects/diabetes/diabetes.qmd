@@ -1,0 +1,50 @@
+---
+title: "Predicting Incidence of Diabetes"
+toc: true
+---
+
+
+## markdown text
+
+```{python}
+
+import polars as pl
+import matplotlib.pyplot as plt
+
+
+from pyprojroot.here import here
+
+```
+
+## Now get the data
+
+```{python}
+
+df = pl.read_csv(here("projects/diabetes/diabetes.csv"))
+
+print(df)
+
+```
+
+
+```{python}
+
+fig, ax = plt.subplots()
+ax.scatter(
+    x = df["SkinThickness"],
+    y = df["BloodPressure"]
+)
+
+```
+
+
+
+```{python}
+
+```
+
+
+
+```{python}
+
+```
