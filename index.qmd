@@ -56,7 +56,7 @@ data = {
     ],
     "end_date": [
         "December 2014", "May 2016", "August 2016", "June 2018", "May 2016", "December 2022",
-        "December 2022", "February 2023", "December 2022", "May 2024", "April 2025", "August 2024", "August 2021"
+        "December 2022", "February 2023", "December 2022", "May 2024", "April 2025", "August 2024", "December 2021"
     ],
     "activity_type": [
         "Research", "Research", "Research", "Research", "Education", "Education",
@@ -116,7 +116,7 @@ for i, row in enumerate(df.iter_rows(named=True)):
         legend_handles[activity_type] = handle
 
 # Labels and title
-ax.set_title("Research, Data Analysis, and Graduate Education since 2014")
+ax.set_title("Experienced Data Scientist")
 ax.spines["top"].set_visible(False)
 ax.spines["right"].set_visible(False)
 ax.tick_params(length=0)
