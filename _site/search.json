@@ -18,14 +18,14 @@
     "href": "projects/diabetes/diabetes.html",
     "title": "Predicting Incidence of Diabetes",
     "section": "",
-    "text": "import polars as pl\nimport matplotlib.pyplot as plt\n\n\nfrom pyprojroot.here import here"
+    "text": "import polars as pl\nimport seaborn as sns\nimport matplotlib.pyplot as plt\nfrom mplstyle import mplstyle_from_brand\nfrom brand_yml import Brand\n\nfrom pyprojroot.here import here\n\nmplstyle_from_brand(here(\"_brand.yml\"))"
   },
   {
     "objectID": "projects/diabetes/diabetes.html#markdown-text",
     "href": "projects/diabetes/diabetes.html#markdown-text",
     "title": "Predicting Incidence of Diabetes",
     "section": "",
-    "text": "import polars as pl\nimport matplotlib.pyplot as plt\n\n\nfrom pyprojroot.here import here"
+    "text": "import polars as pl\nimport seaborn as sns\nimport matplotlib.pyplot as plt\nfrom mplstyle import mplstyle_from_brand\nfrom brand_yml import Brand\n\nfrom pyprojroot.here import here\n\nmplstyle_from_brand(here(\"_brand.yml\"))"
   },
   {
     "objectID": "projects/diabetes/diabetes.html#now-get-the-data",

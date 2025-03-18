@@ -9,10 +9,14 @@ toc: true
 ```{python}
 
 import polars as pl
+import seaborn as sns
 import matplotlib.pyplot as plt
-
+from mplstyle import mplstyle_from_brand
+from brand_yml import Brand
 
 from pyprojroot.here import here
+
+mplstyle_from_brand(here("_brand.yml"))
 
 ```
 
