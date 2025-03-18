@@ -1,5 +1,4 @@
 ---
-title: "Publications"
 format:
     html: 
         html-table-processing: none
@@ -11,7 +10,7 @@ format:
 
 import polars as pl
 import polars.selectors as cs 
-from great_tables import GT, loc, style
+from great_tables import GT, loc, style, html
 from pyprojroot.here import here
 
 here()
@@ -25,11 +24,14 @@ here()
 
 df = (
     pl.read_csv(here("publications/citations.csv"))
-    .select(["Year", "Title", "Publication", "Authors"])
+    .select(["Year", "Title", "Publication", "Type","Authors","URL"])
     .rename({"Publication": "Venue"})
     .sort(by="Year", descending=True)
     .with_columns(
-        pl.col("Venue").str.to_titlecase()
+        pl.col("Venue")
+        .str.to_titlecase()
+        .str.replace("Of", "of")
+        .str.replace("And", "and")
     )
     .with_columns(
         pl.when(pl.col("Title") == "A Biocultural Approach to Understanding the Impacts of Psychosocial Stress")
@@ -39,6 +41,12 @@ df = (
         .otherwise(pl.col("Venue"))
         .alias("Venue")
     )
+    .with_columns(
+        pl.concat_str(
+            [pl.lit("["), pl.col("Type"), pl.lit("]("), pl.col("URL"), pl.lit(")")], separator=""
+        ).alias("Type")
+    )
+    .drop("URL")
 )
 
 print(df)
@@ -53,6 +61,9 @@ print(df)
 
 gt1 = (
     GT(df)
+    .tab_header(
+        title="Publications"
+    )
     .tab_style(
         style=style.text(style='italic'),
         locations=loc.body(columns="Venue"))
@@ -61,6 +72,8 @@ gt1 = (
     #     locations=loc.column_labels()
     # )
     .opt_horizontal_padding(scale=3)
+    .opt_vertical_padding(scale=0.5)
+    .fmt_markdown(columns=["Type"])
 )
 
 gt1
