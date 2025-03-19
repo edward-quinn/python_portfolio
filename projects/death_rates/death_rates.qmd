@@ -4,8 +4,12 @@ categories: [Data Visualization]
 format:
     html:
         toc: true
+        code-fold: true
 ---
 
+# Introduction
+
+This document uses [age-adjusted death rates from the National Center for Health Statistics for the years 1900-2018](https://data.cdc.gov/NCHS/NCHS-Age-adjusted-Death-Rates-for-Selected-Major-C/6rkc-nb2q/about_data) to demonstrate good data visualization principles. Clutter is removed and a coherent message is communicated to the audience.
 
 ```{python}
 #| include: false
@@ -15,6 +19,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from pyprojroot.here import here
 import datetime
+from highlight_text import ax_text
+from pyfonts import load_font
 
 # from mplstyle import mplstyle_from_brand
 # from brand_yml import Brand
@@ -37,7 +43,9 @@ df.glimpse()
 
 ```
 
-# Initial Plot
+# Visualization
+
+## Plot All Causes of Death
 
 ```{python}
 
@@ -58,13 +66,13 @@ plt.show()
 
 ```
 
-Let's focus on a single disease in the data. This allows for better understanding of the patterns.
+There's a lot going on here, not to mention a legend that is in the way. Let's focus on a single disease in the data. This allows for better understanding of the patterns.
 
-# Heart Disease
+## Plot Heart Disease
 
 ```{python}
 
-# Ensure the 'Year' column is a date type
+# Subset for heart disease
 df_heart = (
     df
     .filter(pl.col("Cause") == "Heart Disease")
@@ -75,6 +83,17 @@ cutoff = pl.lit("2000-01-01").str.to_date()
 df_old = df_heart.filter(pl.col("Year") <= cutoff)
 df_new = df_heart.filter(pl.col("Year") >= cutoff)
 
+
+
+
+# Load the font for the plot
+font = load_font(
+    "https://github.com/google/fonts/blob/main/ofl/merriweather/Merriweather%5Bopsz%2Cwdth%2Cwght%5D.ttf?raw=true"
+)
+
+
+
+# Initialize the plot
 fig, ax = plt.subplots()
 
 # Plot the segment for years <= 2000 in skyblue
@@ -82,7 +101,7 @@ ax.plot(
     df_old["Year"],
     df_old["Age Adjusted Death Rate"],
     linewidth=2.5,
-    color="skyblue"
+    color="#7EC0EE"
 )
 
 # Plot the segment for years > 2000 in lightgrey
@@ -109,8 +128,59 @@ ax.hlines(
 ax.spines["top"].set_visible(False)
 ax.spines["right"].set_visible(False)
 ax.tick_params(length=0)
-ax.set_title("It took 100 years for the Heart Disease Death Rate to recover to levels observed in 1900")
+# ax.set_title()
+# ax.set_ylabel()
+ax.set_xlabel("Year", font = font)
+
+
+ax.text(
+    x = 2000,
+    y = 475,
+    size = 11,
+    s = "Heart Disease\n Death Rate",
+    color = "#7EC0EE",
+    weight = "bold",
+    ha="left"
+)
+
+# Adjust top margin
+fig.subplots_adjust(top=0.8, bottom=0.05)
+
+
+# Title with higlight_text
+
+text = "It took 100 years for the <Heart Disease Death Rate>\nto recover to levels observed in 1900"
+ax_text(
+    x=-10**4.45, y=720, s=text,
+    fontsize=16, color='black',
+    font = font,
+    highlight_textprops=[
+      {"color": "#7EC0EE", 'fontweight': 'bold'}
+    ]
+)
+
+# Subtitle
+fig.text(
+  x=.124,
+  y=.825,
+  s="Death Rate (per 100K)",
+  size=10,
+  font=font,
+  color="gray"
+)
+
+# caption
+fig.text(
+  x=.6,
+  y=-0.05,
+  s="Source: National Center for Health Statistics",
+  size=6,
+  color="#6E6E6E"
+)
 
 
 plt.show()
+
+
+
 ```
