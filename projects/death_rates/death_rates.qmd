@@ -9,7 +9,7 @@ format:
 
 # Introduction
 
-This document uses [age-adjusted death rates from the National Center for Health Statistics for the years 1900-2018](https://data.cdc.gov/NCHS/NCHS-Age-adjusted-Death-Rates-for-Selected-Major-C/6rkc-nb2q/about_data) to demonstrate good data visualization principles. Clutter is removed and a coherent message is communicated to the audience.
+This document uses age-adjusted death rates from the [National Center for Health Statistics](https://data.cdc.gov/NCHS/NCHS-Age-adjusted-Death-Rates-for-Selected-Major-C/6rkc-nb2q/about_data) for the years 1900-2018  to demonstrate good data visualization principles. Clutter is removed and a coherent message is communicated to the audience.
 
 ```{python}
 #| include: false
@@ -28,7 +28,7 @@ from pyfonts import load_font
 
 ```
 
-# Read in Data
+# Load Data
 
 ```{python}
 
@@ -43,6 +43,8 @@ df.glimpse()
 
 ```
 
+<br>
+
 # Visualization
 
 ## Plot All Causes of Death
@@ -56,19 +58,24 @@ for cause, group in df.group_by("Cause"):
     ax.plot(group["Year"], group["Age Adjusted Death Rate"], label=cause, linewidth=2.5)
 
 
-ax.spines["top"].set_visible(False)
-ax.spines["right"].set_visible(False)
-ax.tick_params(length=0)
+# ax.spines["top"].set_visible(False)
+# ax.spines["right"].set_visible(False)
+# ax.tick_params(length=0)
 ax.legend(title="Cause")
-ax.set_title("Initial Rough Plot")
+# ax.set_title("Initial Rough Plot")
 
 plt.show()
 
 ```
 
-There's a lot going on here, not to mention a legend that is in the way. Let's focus on a single disease in the data. This allows for better understanding of the patterns.
+There's a lot going on here, not to mention a legend that is in the way. Instead of looking at all five causes of death in the data, let's focus on a single disease. 
+
+<br>
 
 ## Plot Heart Disease
+
+Let's subset for heart disease and see what that looks like.
+
 
 ```{python}
 
@@ -77,6 +84,41 @@ df_heart = (
     df
     .filter(pl.col("Cause") == "Heart Disease")
 )
+
+
+# Initialize the plot
+fig, ax = plt.subplots()
+
+# Plot the segment for years <= 2000 in skyblue
+ax.plot(
+    df_heart["Year"],
+    df_heart["Age Adjusted Death Rate"],
+    linewidth=2.5,
+    label="Heart Disease",
+    color="#7EC0EE"
+)
+
+ax.legend(title="Cause")
+
+plt.show()
+
+```
+
+This makes it easier to see what is happening with heart disease specifically. There is an interesting pattern here, which is that death rates from heart disease are lower than they have ever been since 1900, but that progress was not linear.
+
+Let's make a graph that highlights how long it took to recover to the death rate in 1900, which was `{python} df_heart.filter(pl.col("Year") == datetime.date(1900, 1, 1))["Age Adjusted Death Rate"].item()` per 100,000 U.S. residents.
+
+The graph below utilizes several methods to tell this story:
+
+1. The top and right spines are removed.
+2. The axis tick marks are removed.
+3. Color is used to distinguish between the period of recovery to the death rate in 1900 and the period afterwards, when death rates are below the level observed in 1900.
+4. A horizontal line is added to further distinguish the recovery to 1900 death rates.
+5. The legend is removed in favor of direct labeling in the graph and in the title of the graph itself.
+
+
+```{python}
+
 
 # Split the data into two parts: before (and including) 2000 and after 2000
 cutoff = pl.lit("2000-01-01").str.to_date()
@@ -184,3 +226,7 @@ plt.show()
 
 
 ```
+
+
+This all makes it easier for the viewer to notice that it took 100 years to recover to the heart disease death rate observed in 1900. Visualizations that are easier to read are more likely to be understood and acted upon.
+
